@@ -79,5 +79,6 @@ Mac 에서 마지막으로 빌드한 커밋 `5c7ed01` (macOS 설치 파일·메�
 
 ## 참고
 
+- 개발 환경이 없는 다른 Mac 에는 [GitHub Releases](https://github.com/dreamscapeaudio2023-star/OBJITTER/releases) 의 .pkg 로 설치합니다 — [`MAC-INSTALL.md`](MAC-INSTALL.md) 참고.
 - 로고 원본이 258px 라서 `icon-source.png`(1024px)·`icon-512.png` 는 확대된 것입니다. Finder 큰 아이콘 보기에서 약간 흐릴 수 있습니다 — 1024px 이상 PNG 나 SVG 원본을 받으면 Windows 에서 `scripts/make-brand-assets.ps1` 로 다시 만들면 됩니다.
 - 회사 원본 디자인 패키지(`artifacts/`)는 `.gitignore` 에 있어 저장소에 없습니다. Mac 에서는 필요 없습니다 (파생 파일 `public/assets/`·`scripts/mac/assets/` 만 사용). `make-brand-assets.ps1` 는 Windows 전용입니다.

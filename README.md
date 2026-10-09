@@ -632,7 +632,8 @@ M1~M4 Mac(Apple Silicon)과 Intel Mac 모두 같은 방법입니다. Objitter �
    - 메뉴의 `설정`: 웹 UI 포트, OSC 컨트롤 포트, 외부 기기 접속 허용(끄면 `HOST=127.0.0.1`), 허용 호스트 이름, 잠자기 방지, 앱 실행 시 서버 자동 시작, 서버 시작 시 브라우저 열기, 로그인 시 실행. 값은 `defaults` 도메인 `app.objitter` 에 저장되고 서버 쪽 설정은 재시작 시 적용됩니다 (위 환경 변수로 전달).
    - 데이터: `~/Library/Application Support/Objitter` (`data/`, `presets/`, `library/` — 첫 실행 때 데모 프리셋 복사), 로그: `~/Library/Logs/Objitter/server.log`.
    - 앱 안의 서버 파일은 `Contents/Resources/app/` 입니다. 서버·UI 코드를 바꾼 뒤에는 스크립트를 다시 실행해 새 .pkg 를 만드세요. 설치 프로그램은 기존 앱을 종료·삭제한 뒤 설치하고, 끝나면 앱을 실행합니다.
-   - 서명: 기본은 ad-hoc 서명이라 다른 Mac 에서는 "확인되지 않은 개발자" 경고가 뜹니다 (.pkg 우클릭 → 열기). Apple Developer ID 가 있으면 `SIGN_APP="Developer ID Application: …" SIGN_PKG="Developer ID Installer: …"` 로 서명한 뒤 `notarytool` 로 공증하세요.
+   - 서명: 기본은 ad-hoc 서명이라 다른 Mac 에서는 "확인되지 않은 개발자" 경고가 뜹니다 (macOS 14 이하: .pkg 우클릭 → 열기, macOS 15 이상: 시스템 설정 → 개인정보 보호 및 보안 → `그래도 열기`). Apple Developer ID 가 있으면 `SIGN_APP="Developer ID Application: …" SIGN_PKG="Developer ID Installer: …"` 로 서명한 뒤 `notarytool` 로 공증하세요.
+   - **다른 Mac 에 설치하는 방법**(내려받기, 경고 넘기기, 방화벽·로컬 네트워크 권한, 업데이트·삭제, 공증): [`docs/MAC-INSTALL.md`](docs/MAC-INSTALL.md). 설치 파일은 [GitHub Releases](https://github.com/dreamscapeaudio2023-star/OBJITTER/releases) 에 있습니다.
    - 프로젝트가 ExFAT/FAT 외장 디스크에 있어도 됩니다 (권한 문제를 피하려고 시스템 디스크의 임시 폴더에서 조립).
    - 이미 설치한 Mac 을 최신 변경으로 업데이트하는 방법·확인 목록: [`docs/MAC-UPDATE.md`](docs/MAC-UPDATE.md)
 
