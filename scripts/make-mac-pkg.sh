@@ -104,7 +104,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSMinimumSystemVersion</key><string>11.0</string>
   <key>LSUIElement</key><true/>
   <key>NSHighResolutionCapable</key><true/>
-  <key>NSHumanReadableCopyright</key><string>© 2026 DREAMSCAPE Inc. All rights reserved.</string>
+  <key>NSHumanReadableCopyright</key><string>© 2026 DREAMSCAPE Inc. All rights reserved. Internal use only.</string>
   <key>CFBundleGetInfoString</key><string>Objitter $VERSION · Made by DREAMSCAPE</string>
 </dict>
 </plist>

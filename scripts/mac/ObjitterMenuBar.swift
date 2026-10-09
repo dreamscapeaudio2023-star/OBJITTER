@@ -1,6 +1,6 @@
 // Objitter menu bar app: runs the bundled Node server in the background and controls it from the status menu.
 // Built by scripts/make-mac-pkg.sh. Expects Contents/Resources/{node/bin/node, app/} (+ optional MenuBarIcon.png/@2x).
-// © 2026 DREAMSCAPE Inc.
+// © 2026 DREAMSCAPE Inc. All rights reserved. Proprietary — see LICENSE.
 import AppKit
 import Darwin
 import ServiceManagement
@@ -487,7 +487,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         let credits = NSAttributedString(
-            string: L("DREAMSCAPE 제작\n이머시브 오디오 오브젝트 모션 컨트롤러", "Made by DREAMSCAPE\nImmersive audio object motion controller"),
+            string: L("DREAMSCAPE 제작\n이머시브 오디오 오브젝트 모션 컨트롤러\n사내 전용 · 무단 복제·배포 금지",
+                      "Made by DREAMSCAPE\nImmersive audio object motion controller\nInternal use only · No copying or distribution without permission"),
             attributes: [
                 .font: NSFont.systemFont(ofSize: NSFont.smallSystemFontSize),
                 .foregroundColor: NSColor.secondaryLabelColor,

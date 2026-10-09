@@ -1209,6 +1209,7 @@ export default {
   'about.madeBy': 'Made by DREAMSCAPE',
   'about.company': 'Objitter is designed, built and maintained by DREAMSCAPE.',
   'about.copyright': '© 2026 DREAMSCAPE Inc. All rights reserved.',
+  'about.license': 'Proprietary software for internal use. Copying or distribution without written permission from DREAMSCAPE Inc. is prohibited.',
   // ---------- top bar zones, cheat sheet ----------
   'top.master': 'Master',
   'top.master.title': 'Master speed and fade time',

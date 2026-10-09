@@ -3,7 +3,7 @@
 <img src="public/assets/dreamscape-128.png" alt="DREAMSCAPE" width="48" height="48" align="left" />
 
 **Made by DREAMSCAPE** — Objitter 는 DREAMSCAPE 가 만들고 관리하는 소프트웨어입니다.<br />
-© 2026 DREAMSCAPE Inc. All rights reserved.
+© 2026 DREAMSCAPE Inc. All rights reserved. 사내 전용 · 무단 복제·배포 금지.
 
 ![Objitter](public/assets/hero.jpg)
 
@@ -686,6 +686,10 @@ npm test
 
 Objitter 는 **DREAMSCAPE** 가 만들었습니다. 앱 아이콘·메뉴 막대 아이콘·웹 UI 로고는 DREAMSCAPE 브랜드 로고 v3 입니다.
 회사 원본 디자인 자산(`artifacts/`)은 저장소에 넣지 않고, 앱에 쓰는 파생 파일만 `public/assets/`·`scripts/mac/assets/` 에 둡니다.
+
+## 라이선스
+
+사내 전용 소프트웨어입니다. DREAMSCAPE Inc. 의 서면 허가 없이 사용·무단 복제·배포를 금지합니다. 자세한 내용은 [`LICENSE`](LICENSE) 를 참고하세요.
 
 © 2026 DREAMSCAPE Inc. All rights reserved.
 

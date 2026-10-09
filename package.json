@@ -12,7 +12,7 @@
   },
   "author": "DREAMSCAPE Inc.",
   "keywords": ["osc", "spat", "l-isa", "soundscape", "immersive", "audio"],
-  "license": "MIT",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=18"
   },

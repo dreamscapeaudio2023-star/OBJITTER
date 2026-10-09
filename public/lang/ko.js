@@ -1209,6 +1209,7 @@ export default {
   'about.madeBy': 'DREAMSCAPE 제작',
   'about.company': 'Objitter 는 DREAMSCAPE 가 만들고 관리하는 소프트웨어입니다.',
   'about.copyright': '© 2026 DREAMSCAPE Inc. All rights reserved.',
+  'about.license': '사내 전용 소프트웨어입니다. DREAMSCAPE Inc. 의 서면 허가 없이 무단 복제·배포를 금지합니다.',
   // ---------- top bar zones, cheat sheet ----------
   'top.master': '마스터',
   'top.master.title': '마스터 속도·페이드 시간',
