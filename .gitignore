@@ -2,6 +2,10 @@ node_modules/
 build/
 dist/
 
+# Companion module build outputs
+integrations/*/pkg/
+integrations/*/*.tgz
+
 # runtime / personal data (state, sessions, uploaded stage assets, library)
 data/
 library/

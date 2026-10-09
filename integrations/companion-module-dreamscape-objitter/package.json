@@ -1,0 +1,27 @@
+{
+  "name": "dreamscape-objitter",
+  "version": "1.0.0",
+  "description": "Bitfocus Companion module for DREAMSCAPE Objitter (OSC control + WebSocket feedback)",
+  "main": "src/main.js",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "test": "node test/actions.test.js && node test/integration.test.js",
+    "test:actions": "node test/actions.test.js",
+    "test:integration": "node test/integration.test.js",
+    "check": "node scripts/check.js",
+    "package": "companion-module-build"
+  },
+  "author": "DREAMSCAPE Inc.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@companion-module/base": "~1.11.3",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@companion-module/tools": "~2.3.0"
+  }
+}

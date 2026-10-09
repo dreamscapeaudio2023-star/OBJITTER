@@ -1,0 +1,26 @@
+{
+  "$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+  "id": "dreamscape-objitter",
+  "name": "DREAMSCAPE Objitter",
+  "shortname": "objitter",
+  "description": "Control DREAMSCAPE Objitter (immersive-audio object motion controller) over OSC, with live feedback over WebSocket",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "repository": "git+https://github.com/dreamscapeaudio2023-star/OBJITTER.git",
+  "bugs": "https://github.com/dreamscapeaudio2023-star/OBJITTER/issues",
+  "maintainers": [
+    {
+      "name": "DREAMSCAPE Inc."
+    }
+  ],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "0.0.0",
+    "entrypoint": "../src/main.js"
+  },
+  "legacyIds": [],
+  "manufacturer": "DREAMSCAPE",
+  "products": ["Objitter"],
+  "keywords": ["immersive", "spatial audio", "object", "motion", "osc", "timecode", "spat", "l-isa", "soundscape"]
+}
