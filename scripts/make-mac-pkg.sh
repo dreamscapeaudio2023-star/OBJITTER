@@ -1,0 +1,182 @@
+#!/bin/bash
+# Builds a self-contained macOS installer: dist/Objitter-<version>.pkg
+# The installed /Applications/Objitter.app is a menu bar app (scripts/mac/ObjitterMenuBar.swift) that runs the
+# bundled universal Node.js (arm64 + x86_64) server in the background, so target Macs need nothing else.
+# User data lives in ~/Library/Application Support/Objitter, the server log in ~/Library/Logs/Objitter/server.log,
+# menu settings in the app.objitter defaults domain.
+# Usage (from the project folder):   bash scripts/make-mac-pkg.sh
+# Optional env: NODE_VERSION (default below), SIGN_APP="Developer ID Application: …", SIGN_PKG="Developer ID Installer: …",
+#               KEEP_APP=<folder> (also copy the built Objitter.app there)
+# Requires the Swift compiler (Xcode or Command Line Tools).
+set -euo pipefail
+
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "This script only runs on macOS." >&2
+  exit 1
+fi
+
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+NODE_VERSION="${NODE_VERSION:-v24.21.0}"
+VERSION=$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$PROJECT_DIR/package.json" | head -n 1)
+VERSION=${VERSION:-0.0.0}
+BUILD="$PROJECT_DIR/build"
+CACHE="$BUILD/cache"
+# Stage on the system disk: ExFAT/FAT volumes don't store POSIX permissions and would ship a root-only (700) app.
+STAGE=$(mktemp -d "${TMPDIR:-/tmp}/objitter-pkg.XXXXXX")
+trap 'rm -rf "$STAGE"' EXIT
+ROOT="$STAGE/pkgroot"
+APP="$ROOT/Objitter.app"
+RES="$APP/Contents/Resources"
+DIST="$PROJECT_DIR/dist"
+PKG="$DIST/Objitter-$VERSION.pkg"
+
+echo "Building Objitter $VERSION installer (Node $NODE_VERSION)…"
+mkdir -p "$CACHE" "$DIST" "$APP/Contents/MacOS" "$RES/app" "$RES/node/bin"
+
+# ---- menu bar app (universal) ----
+echo "  compiling menu bar app…"
+for arch in arm64 x86_64; do
+  (cd "$STAGE" && swiftc -O -swift-version 5 -target "$arch-apple-macos11.0" \
+    -o "$STAGE/Objitter-$arch" "$PROJECT_DIR/scripts/mac/ObjitterMenuBar.swift")
+done
+lipo -create "$STAGE/Objitter-arm64" "$STAGE/Objitter-x86_64" -output "$APP/Contents/MacOS/Objitter"
+
+# ---- universal Node.js ----
+for arch in arm64 x64; do
+  tgz="$CACHE/node-$NODE_VERSION-darwin-$arch.tar.gz"
+  if [ ! -f "$tgz" ]; then
+    echo "  downloading Node $NODE_VERSION ($arch)…"
+    curl -fL --progress-bar -o "$tgz.part" "https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-darwin-$arch.tar.gz"
+    mv "$tgz.part" "$tgz"
+  fi
+  tar -xzf "$tgz" -C "$CACHE" "node-$NODE_VERSION-darwin-$arch/bin/node"
+done
+lipo -create \
+  "$CACHE/node-$NODE_VERSION-darwin-arm64/bin/node" \
+  "$CACHE/node-$NODE_VERSION-darwin-x64/bin/node" \
+  -output "$RES/node/bin/node"
+
+# ---- app files + production dependencies ----
+for f in package.json package-lock.json README.md; do
+  [ -f "$PROJECT_DIR/$f" ] && cp "$PROJECT_DIR/$f" "$RES/app/"
+done
+cp -R "$PROJECT_DIR/server" "$PROJECT_DIR/public" "$RES/app/"
+mkdir -p "$RES/app/presets" "$RES/app/demo"
+cp "$PROJECT_DIR"/presets/Demo\ -\ *.json "$RES/app/presets/"
+cp -R "$PROJECT_DIR/demo/." "$RES/app/demo/"
+(cd "$RES/app" && npm ci --omit=dev --no-audit --no-fund --ignore-scripts >/dev/null)
+find "$RES/app" -name .DS_Store -delete
+
+# ---- icon ----
+SRC_ICON="$PROJECT_DIR/public/assets/icon-source.jpg"
+[ -f "$SRC_ICON" ] || SRC_ICON="$PROJECT_DIR/public/assets/icon-512.png"
+ICONSET="$STAGE/Objitter.iconset"
+mkdir -p "$ICONSET"
+for s in 16 32 128 256 512; do
+  sips -s format png -z "$s" "$s" "$SRC_ICON" --out "$ICONSET/icon_${s}x${s}.png" >/dev/null
+  d=$((s * 2))
+  sips -s format png -z "$d" "$d" "$SRC_ICON" --out "$ICONSET/icon_${s}x${s}@2x.png" >/dev/null
+done
+iconutil -c icns "$ICONSET" -o "$RES/Objitter.icns"
+
+# ---- Info.plist ----
+cat > "$APP/Contents/Info.plist" <<PLIST
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>Objitter</string>
+  <key>CFBundleDisplayName</key><string>Objitter</string>
+  <key>CFBundleIdentifier</key><string>app.objitter</string>
+  <key>CFBundleVersion</key><string>$VERSION</string>
+  <key>CFBundleShortVersionString</key><string>$VERSION</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleExecutable</key><string>Objitter</string>
+  <key>CFBundleIconFile</key><string>Objitter</string>
+  <key>CFBundleDevelopmentRegion</key><string>en</string>
+  <key>CFBundleLocalizations</key><array><string>en</string><string>ko</string></array>
+  <key>LSMinimumSystemVersion</key><string>11.0</string>
+  <key>LSUIElement</key><true/>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>NSHumanReadableCopyright</key><string>Immersive object motion controller · MIT License</string>
+</dict>
+</plist>
+PLIST
+
+# ---- Terminal launcher kept for troubleshooting: shows the live server log (quit the menu bar app first) ----
+cat > "$RES/Objitter.command" <<'RUN'
+#!/bin/bash
+RES="$(cd "$(dirname "$0")" && pwd)"
+APPDIR="$RES/app"
+SUPPORT="$HOME/Library/Application Support/Objitter"
+mkdir -p "$SUPPORT/data" "$SUPPORT/library" "$SUPPORT/presets"
+export DATA_DIR="$SUPPORT/data" PRESET_DIR="$SUPPORT/presets" LIBRARY_DIR="$SUPPORT/library"
+export PORT="${PORT:-$(defaults read app.objitter port 2>/dev/null || echo 8080)}"
+printf '\033]0;Objitter\007'
+if lsof -nP -iTCP:"$PORT" -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "[objitter] Port $PORT is already in use (quit the Objitter menu bar app first):"
+  lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | sed -n '1,5p'
+  echo
+  read -r -p "Press Enter to close this window… " _
+  exit 1
+fi
+cd "$APPDIR" && exec "$RES/node/bin/node" server/index.js
+RUN
+
+# ---- permissions + signing (ad-hoc unless a Developer ID is given) ----
+chmod -R u=rwX,go=rX "$APP"
+chmod 755 "$APP/Contents/MacOS/Objitter" "$RES/Objitter.command" "$RES/node/bin/node"
+xattr -cr "$APP" 2>/dev/null || true
+if [ -n "${SIGN_APP:-}" ]; then
+  codesign --force --options runtime --timestamp \
+    --entitlements /dev/stdin -s "$SIGN_APP" "$RES/node/bin/node" <<'ENT'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>com.apple.security.cs.allow-jit</key><true/>
+  <key>com.apple.security.cs.allow-unsigned-executable-memory</key><true/>
+</dict></plist>
+ENT
+  codesign --force --options runtime --timestamp -s "$SIGN_APP" "$APP"
+else
+  codesign --force -s - "$APP"
+fi
+
+# ---- package ----
+mkdir -p "$STAGE/scripts"
+cat > "$STAGE/scripts/preinstall" <<'PRE'
+#!/bin/bash
+# Quit a running Objitter (and its server) and remove the old bundle so no stale files stay inside it.
+pkill -x Objitter 2>/dev/null
+pkill -f "Objitter.app/Contents/MacOS/applet" 2>/dev/null
+pkill -f "Objitter.app/Contents/Resources/node/bin/node" 2>/dev/null
+sleep 1
+rm -rf "${2:-/Applications}/Objitter.app"
+exit 0
+PRE
+cat > "$STAGE/scripts/postinstall" <<'POST'
+#!/bin/bash
+uid=$(stat -f %u /dev/console 2>/dev/null)
+if [ -n "$uid" ] && [ "$uid" != 0 ]; then
+  launchctl asuser "$uid" sudo -u "#$uid" open "${2:-/Applications}/Objitter.app" 2>/dev/null
+fi
+exit 0
+POST
+chmod 755 "$STAGE/scripts/preinstall" "$STAGE/scripts/postinstall"
+
+pkgbuild --analyze --root "$ROOT" "$STAGE/component.plist" >/dev/null
+/usr/libexec/PlistBuddy -c "Set :0:BundleIsRelocatable false" "$STAGE/component.plist"
+pkgbuild --root "$ROOT" --component-plist "$STAGE/component.plist" --scripts "$STAGE/scripts" \
+  --identifier app.objitter.pkg --version "$VERSION" --ownership recommended \
+  --install-location /Applications "$STAGE/component.pkg"
+rm -f "$PKG"
+if [ -n "${SIGN_PKG:-}" ]; then
+  productbuild --package "$STAGE/component.pkg" --sign "$SIGN_PKG" "$PKG"
+else
+  productbuild --package "$STAGE/component.pkg" "$PKG"
+fi
+
+if [ -n "${KEEP_APP:-}" ]; then
+  rm -rf "$KEEP_APP/Objitter.app" && ditto "$APP" "$KEEP_APP/Objitter.app"
+fi
+echo "Done: $PKG ($(du -h "$PKG" | cut -f1))"

@@ -1,4 +1,6 @@
 node_modules/
+build/
+dist/
 
 # runtime / personal data (state, sessions, uploaded stage assets, library)
 data/

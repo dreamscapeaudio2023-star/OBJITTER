@@ -579,7 +579,8 @@ presets/       프리셋 (*.json) — 데모 프리셋 8개 포함
 library/       오브젝트 라이브러리 (처음 저장할 때 생김)
 demo/          데모 쇼 파일
 data/          마지막 상태 (state.json)
-scripts/       데모 프리셋·쇼 생성 스크립트, make-mac-app.sh (macOS 앱 번들 만들기)
+scripts/       데모 프리셋·쇼 생성 스크립트, make-mac-app.sh (macOS 앱 번들 만들기),
+               make-mac-pkg.sh + mac/ObjitterMenuBar.swift (macOS 설치 파일·메뉴 막대 앱)
 test/          `npm test` — 단위 테스트 + 서버 통합 테스트 (임시 폴더·빈 포트 사용)
 ```
 
@@ -611,6 +612,17 @@ M1~M4 Mac(Apple Silicon)과 Intel Mac 모두 같은 방법입니다. Objitter �
    bash scripts/make-mac-app.sh /Applications
    ```
    아이콘(`sips`·`iconutil` 로 `icon-source.jpg` 에서 .icns 생성)과 Info.plist 가 들어간 `Objitter.app` 을 만듭니다. 앱을 열면 터미널에서 `start-mac.command` 를 실행합니다 (로그가 보이고 `Ctrl+C` 로 종료). 폴더를 옮기면 스크립트를 다시 실행하세요.
+8. **설치 파일(.pkg) 만들기 (배포용)**: Mac 에서 (Xcode 또는 Command Line Tools 의 `swiftc` 필요)
+   ```bash
+   bash scripts/make-mac-pkg.sh            # → dist/Objitter-<버전>.pkg
+   ```
+   - Node.js(universal, arm64 + x86_64)를 앱 안에 넣으므로 설치할 Mac 에는 Node 가 없어도 됩니다. 처음 빌드할 때 Node 를 내려받아 `build/cache/` 에 보관합니다 (`NODE_VERSION=v24.21.0` 처럼 버전 지정 가능).
+   - 설치하면 `/Applications/Objitter.app` — **메뉴 막대 앱**(`scripts/mac/ObjitterMenuBar.swift`)입니다. Dock·터미널 없이 서버를 백그라운드로 실행하고, 메뉴 막대 아이콘에서 서버 시작/정지/재시작, 웹 UI 열기, 네트워크 주소 복사, 로그 보기, 데이터 폴더 열기를 합니다. 메뉴는 시스템 언어(한국어/영어)를 따릅니다.
+   - 메뉴의 `설정`: 웹 UI 포트, OSC 컨트롤 포트, 외부 기기 접속 허용(끄면 `HOST=127.0.0.1`), 허용 호스트 이름, 잠자기 방지, 앱 실행 시 서버 자동 시작, 서버 시작 시 브라우저 열기, 로그인 시 실행. 값은 `defaults` 도메인 `app.objitter` 에 저장되고 서버 쪽 설정은 재시작 시 적용됩니다 (위 환경 변수로 전달).
+   - 데이터: `~/Library/Application Support/Objitter` (`data/`, `presets/`, `library/` — 첫 실행 때 데모 프리셋 복사), 로그: `~/Library/Logs/Objitter/server.log`.
+   - 앱 안의 서버 파일은 `Contents/Resources/app/` 입니다. 서버·UI 코드를 바꾼 뒤에는 스크립트를 다시 실행해 새 .pkg 를 만드세요. 설치 프로그램은 기존 앱을 종료·삭제한 뒤 설치하고, 끝나면 앱을 실행합니다.
+   - 서명: 기본은 ad-hoc 서명이라 다른 Mac 에서는 "확인되지 않은 개발자" 경고가 뜹니다 (.pkg 우클릭 → 열기). Apple Developer ID 가 있으면 `SIGN_APP="Developer ID Application: …" SIGN_PKG="Developer ID Installer: …"` 로 서명한 뒤 `notarytool` 로 공증하세요.
+   - 프로젝트가 ExFAT/FAT 외장 디스크에 있어도 됩니다 (권한 문제를 피하려고 시스템 디스크의 임시 폴더에서 조립).
 
 Mac 에서 달라지는 점:
 
