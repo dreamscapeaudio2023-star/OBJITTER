@@ -46,7 +46,15 @@ Cue numbers are positions in Objitter's cue list (1 = first cue), the same numbe
 
 ### Presets
 
-Ready-made buttons in the categories **Transport**, **Tempo**, **Slots** (1-32 with preset names and active highlight), **Cues** and **Timecode**.
+Ready-made buttons in the categories **Transport**, **Tempo**, **Slots**, **Cues** and **Timecode**. Labels use fixed text sizes and manual line breaks so words never wrap mid-word on a 72×72 button; transport and clock buttons have an icon on top and a short label below. Colours: Transport mint, Tempo violet, Cues yellow, Timecode sky blue.
+
+- **Transport:** START (mint while running), STOP (red while stopped), TOGGLE → `RUNNING` / `STOPPED`, FREEZE → `FROZEN`, RETURN, LOCK → `LOCKED` (yellow), `LINK ONLINE` / `LINK OFFLINE`
+- **Tempo:** TAP + BPM, RESYNC, `BPM +1` / `BPM −1`, BPM display, `SPEED +0.1` / `−0.1`, `SPEED → 1.0`, `TEMPO ×0.5` / `×1` / `×2` (tempo multiplier)
+- **Slots:** `SLOT n` + preset name (`—` when empty, grey when assigned, mint when last recalled)
+- **Cues:** `GO → n` + standby cue label, `CUE BACK`, `CUE NEXT`, `LAST CUE n` + label, `CUE 1`–`CUE 8` standby (mint = fired, yellow = standby)
+- **Timecode:** CLOCK play/pause, PLAY, PAUSE, REWIND, `LOCATE 00:00:00`, `TC CUE` on/off + source, `TIMECODE` display
+
+Buttons placed from an older version of these presets do not change when the module is updated; drag the presets again.
 
 ### Troubleshooting
 

@@ -4,7 +4,7 @@
   "name": "DREAMSCAPE Objitter",
   "shortname": "objitter",
   "description": "Control DREAMSCAPE Objitter (immersive-audio object motion controller) over OSC, with live feedback over WebSocket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "UNLICENSED",
   "repository": "git+https://github.com/dreamscapeaudio2023-star/OBJITTER.git",
   "bugs": "https://github.com/dreamscapeaudio2023-star/OBJITTER/issues",

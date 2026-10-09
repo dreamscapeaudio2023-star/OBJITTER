@@ -21,13 +21,13 @@ Node.js 22 이상이 필요합니다.
 ```powershell
 cd integrations\companion-module-dreamscape-objitter
 npm install
-npm run package        # → dreamscape-objitter-1.0.0.tgz 와 pkg\ 폴더 생성
+npm run package        # → dreamscape-objitter-1.0.1.tgz 와 pkg\ 폴더 생성
 ```
 
 ### 2-A) Companion 4.x — 패키지 가져오기 (권장)
 
 1. Companion 관리 화면 → **Modules** 탭
-2. **Import module package** (모듈 패키지 가져오기) → `dreamscape-objitter-1.0.0.tgz` 선택
+2. **Import module package** (모듈 패키지 가져오기) → `dreamscape-objitter-1.0.1.tgz` 선택
 3. **Connections** 탭 → **+ Add connection** → `DREAMSCAPE Objitter` 검색 → 추가
 4. 연결 설정(아래 "연결 설정")을 입력하고 저장
 
@@ -98,11 +98,19 @@ Objitter 웹 서버는 DNS 리바인딩 방지를 위해 **Host 헤더**를 검�
 
 Companion 의 **Presets** 탭 → `DREAMSCAPE Objitter`:
 
-- **Transport**: START · STOP · RUN 토글 · FREEZE · RETURN · LOCK · 연결 상태
-- **Tempo**: TAP(BPM 표시) · RESYNC · BPM ±1 · BPM 표시 · 속도 ±0.1 · 속도 1.0 · ×0.5 / ×1 / ×2
-- **Slots**: 슬롯 1~32 (프리셋 이름 표시, 지정된 슬롯은 회색, 마지막 호출 슬롯은 민트색)
-- **Cues**: GO(대기 큐 이름) · BACK · NEXT · 마지막 실행 큐 · 큐 1~8 대기 (실행=민트, 대기=노랑)
-- **Timecode**: 클럭 토글(타임코드 표시) · PLAY · PAUSE · REWIND · LOCATE 0 · TC 켬/끔 · 타임코드 표시
+72×72 버튼에서 단어가 중간에 끊기지 않도록 모든 라벨은 줄바꿈을 직접 넣고 글자 크기를 고정했습니다 (아이콘 버튼은 위 아이콘 + 아래 한 줄 라벨). 색은 분류별로 통일: 트랜스포트 = 민트, 템포 = 보라, 큐 = 노랑, 타임코드 = 하늘색.
+
+| 분류 | 버튼 (상태 표시) |
+| --- | --- |
+| Transport | ▶ START (실행 중 민트) · ■ STOP (정지 빨강) · ▶■ TOGGLE → `RUNNING` / `STOPPED` · ❄ FREEZE → `FROZEN` · ⌂ RETURN · 🔓 LOCK → 🔒 `LOCKED` (노랑) · `LINK ONLINE` / `LINK OFFLINE` |
+| Tempo | `TAP` + BPM · ⟳ RESYNC · `BPM +1` / `BPM −1` · `BPM` 표시 · `SPEED +0.1` / `−0.1` · `SPEED → 1.0` · `TEMPO ×0.5` / `×1` / `×2` (템포 배율) |
+| Slots | `SLOT n` + 프리셋 이름 (빈 슬롯은 `—` 회색, 지정됨 = 진회색, 마지막 호출 = 민트) |
+| Cues | `GO → 대기 큐 번호` + 이름 · `CUE BACK` · `CUE NEXT` · `LAST CUE n` + 이름 · `CUE 1` ~ `CUE 8` 대기 (실행 = 민트, 대기 = 노랑) |
+| Timecode | ⏯ CLOCK (재생/멈춤 토글) · ▶ PLAY · ⏸ PAUSE · ⏮ REWIND · `LOCATE 00:00:00` · `TC CUE` on/off + 소스 · `TIMECODE` + 현재 타임코드 |
+
+아이콘은 `scripts/gen-icons.js` 가 이미지 라이브러리 없이 그린 32×32 PNG 이며 (`src/icons/*.png`), 패키지에는 `src/icons.js` 의 base64 로 들어갑니다 (총 약 4 KB).
+
+> **업데이트 후 주의:** 이전 버전 프리셋으로 이미 배치한 버튼은 자동으로 바뀌지 않습니다. 프리셋을 다시 끌어다 놓거나 버튼을 직접 고치세요.
 
 ## 개발 / 테스트
 
@@ -111,7 +119,11 @@ npm install
 npm test              # 액션 OSC 검사 + 임시 Objitter 서버 통합 테스트
 npm run check         # main.js 수명주기 (Companion 없이, 가짜 base)
 npm run package       # .tgz 만들기
+npm run icons         # 아이콘 PNG + src/icons.js 다시 만들기
+npm run preview       # 모든 프리셋 미리보기 PNG (Windows, %TEMP%\objitter-run\companion-presets.png)
 ```
+
+- `test/presets.test.js`: 모든 프리셋·피드백 상태에서 라벨이 비지 않는지, 피드백마다 스타일이 지정됐는지, 각 줄이 Arial 폭 기준 68 px 안에 들어가 단어가 중간에 끊기지 않는지, 아이콘+라벨이 버튼 높이를 넘지 않는지 확인합니다.
 
 - `test/actions.test.js`: UDP 수신 소켓을 열고 모든 액션이 Objitter 가 기대하는 OSC 주소·인자·타입 태그를 정확히 보내는지, WebSocket 전용 액션의 메시지, 잘못된 입력·연결 없음 처리, 피드백·변수·프리셋 정의를 확인합니다.
 - `test/integration.test.js`: 저장소의 `server/index.js` 를 임시 폴더(`DATA_DIR`/`PRESET_DIR`/`LIBRARY_DIR`)와 포트 `18700`(웹)/`19700`(OSC)로 띄우고(`OBJITTER_TEST_PORT`, `OBJITTER_TEST_CONTROL_PORT` 로 변경), 액션으로 START·슬롯/프리셋 호출·BPM·TAP·속도·FREEZE·쇼 잠금·GO/BACK/NEXT/대기·내부 클럭 LOCATE/PLAY/PAUSE/REWIND·STOP 을 실행한 뒤 WebSocket 상태·변수·피드백이 바뀌는지, 서버 재시작 후 자동 재접속하는지 확인합니다. 끝나면 서버를 끄고 임시 폴더를 지웁니다.
@@ -138,6 +150,8 @@ src/actions.js            액션 정의 (OSC / WebSocket 명령)
 src/feedbacks.js          불리언 피드백
 src/variables.js          변수 정의
 src/presets.js            프리셋 버튼
+src/icons.js              프리셋 아이콘 (base64, scripts/gen-icons.js 가 생성) — 원본 PNG 는 src/icons/
+scripts/preview.js        프리셋 미리보기 시트 (preview.ps1, System.Drawing)
 src/state.js              WebSocket 메시지 → 상태 미러, 변수 계산
 src/ws-client.js          읽기 전용 WebSocket 클라이언트 (재접속 1→30 s 백오프, 40 s 무응답 감지)
 src/osc.js                OSC 인코더 / UDP 송신
