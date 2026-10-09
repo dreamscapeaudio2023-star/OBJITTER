@@ -20,7 +20,7 @@ Node.js 로컬 서버가 모션 엔진·타임코드 큐 엔진·OSC(UDP) 송신
 
 1. [Node.js](https://nodejs.org) 18 이상 설치 (LTS 권장)
 2. 실행
-   - **Windows**: `start-windows.bat` 더블클릭. 서버가 뜨면 브라우저가 자동으로 열립니다.
+   - **Windows**: `start-windows.bat` 더블클릭. 서버가 뜨면 브라우저가 자동으로 열립니다. 개발 환경이 없는 PC 에는 설치 파일(`Setup.exe`, 알림 영역 앱)을 씁니다 — [Windows 설치 파일 (알림 영역 앱)](#windows-설치-파일-알림-영역-앱)
    - **macOS**: `start-mac.command` 더블클릭 — 자세한 내용은 아래 [macOS (Apple Silicon) 실행 가이드](#macos-apple-silicon-실행-가이드)
    - 터미널: `npm install` 후 `npm start`
 3. 브라우저에서 `http://localhost:8080` 접속 (처음에는 "Connecting to server…" 화면이 잠깐 보인 뒤 UI 가 나타납니다)
@@ -590,9 +590,31 @@ data/          마지막 상태 (state.json)
 scripts/       데모 프리셋·쇼 생성 스크립트, make-mac-app.sh (macOS 앱 번들 만들기),
                make-mac-pkg.sh + mac/ObjitterMenuBar.swift (macOS 설치 파일·메뉴 막대 앱),
                mac/assets/MenuBarIcon*.png (메뉴 막대 템플릿 아이콘),
+               make-windows-installer.ps1 + windows/ObjitterTray.cs + windows/Objitter.iss (Windows 설치 파일·알림 영역 앱),
                make-brand-assets.ps1 (회사 로고 패키지 artifacts/brand-logo-v3 → 위 아이콘들 다시 만들기, Windows)
 test/          `npm test` — 단위 테스트 + 서버 통합 테스트 (임시 폴더·빈 포트 사용)
 ```
+
+## Windows 설치 파일 (알림 영역 앱)
+
+Mac 의 .pkg·메뉴 막대 앱과 같은 기능의 Windows 판입니다. Node.js 를 함께 넣으므로 설치할 PC 에는 아무것도 필요 없습니다. `start-windows.bat` 는 개발용으로 그대로 씁니다.
+
+- **다른 PC 에 설치하는 방법**(내려받기, SmartScreen 경고 넘기기, 방화벽, 업데이트·삭제, 문제 해결): [`docs/WINDOWS-INSTALL.md`](docs/WINDOWS-INSTALL.md)
+- **만들기** (이 PC 처럼 Inno Setup 6.3+ 가 설치된 Windows):
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File scripts\make-windows-installer.ps1        # → dist\Objitter-<버전>-Setup.exe
+  powershell -ExecutionPolicy Bypass -File scripts\make-windows-installer.ps1 -Zip   # 휴대용 zip 도 함께
+  ```
+  Node.js(win-x64, 기본 `v24.21.0`)를 처음 한 번 내려받아 `build\cache\` 에 보관하고, 트레이 앱은 Windows 기본 .NET Framework 컴파일러(`csc.exe`)로 빌드합니다. Inno Setup 이 없으면 휴대용 zip 만 만듭니다.
+- 설치하면 `%LOCALAPPDATA%\Programs\Objitter` (관리자 권한 불필요) — **알림 영역 앱** `Objitter.exe` (`scripts/windows/ObjitterTray.cs`)가 서버를 창 없이 백그라운드로 실행합니다. 아이콘 메뉴: 웹 UI 열기, 네트워크 주소 복사, 서버 시작/정지/재시작, 설정, 로그 보기, 데이터 폴더 열기, 정보, 종료. 메뉴는 Windows 표시 언어(한국어/영어)를 따릅니다.
+- 아이콘은 DREAMSCAPE 로고입니다. 실행 중이면 선명하게, 정지·시작 중이면 흐리게, 오류면 ⚠ 를 겹쳐 표시합니다.
+- `설정`: 웹 UI 포트, OSC 컨트롤 포트, 외부 기기 접속 허용(끄면 `HOST=127.0.0.1`), 허용 호스트 이름, 절전 모드 방지, 앱 실행 시 서버 자동 시작, 서버 시작 시 브라우저 열기, Windows 로그인 시 실행(`HKCU\…\Run`). 값은 레지스트리 `HKCU\Software\DREAMSCAPE\Objitter` 에 저장되고 서버 쪽 설정은 재시작 시 적용됩니다 (Mac 앱과 같은 환경 변수 `PORT`, `HOST`, `CONTROL_PORT`, `ALLOWED_HOSTS`, `DATA_DIR`, `PRESET_DIR`, `LIBRARY_DIR`, `OBJITTER_CAFFEINATE` 로 전달).
+- 절전 모드 방지: Windows 에서는 알림 영역 앱이 서버가 실행되는 동안 `SetThreadExecutionState` 로 시스템 절전을 막습니다 (Mac 의 `caffeinate -i` 에 해당, 화면 꺼짐은 막지 않음). `start-windows.bat` 로 띄운 서버는 예전처럼 절전을 막지 않습니다.
+- 서버 정지는 서버 콘솔에 `Ctrl+Break` 를 보내 상태를 저장하고 끝내게 합니다 (5초 안에 안 끝나면 강제 종료). 앱이 강제 종료되어 서버만 남으면 다음 실행 때 정리합니다 (이 앱의 `node.exe` + `server/index.js` 인 프로세스만).
+- 데이터: `%APPDATA%\Objitter` (`data\`, `presets\`, `library\` — 첫 실행 때 데모 프리셋 복사), 로그: `%LOCALAPPDATA%\Objitter\Logs\server.log`. 문제 해결용으로 시작 메뉴 `Objitter (콘솔, 문제 해결용)` 이 같은 데이터로 서버를 콘솔 창에서 실행합니다.
+- 설치 프로그램은 실행 중인 Objitter 를 종료(상태 저장)하고 이전 `app\`·`node\` 를 지운 뒤 설치합니다. 제거해도 데이터·설정은 남습니다. 조용히 설치: `Setup.exe /VERYSILENT /SUPPRESSMSGBOXES`.
+- 서명: 코드 서명이 없어 다른 PC 에서는 SmartScreen 경고가 뜹니다 (`추가 정보` → `실행`).
+- 개발 PC 에서 `start-windows.bat`(8080)와 같이 쓰면 포트가 겹칩니다 — 알림 영역 앱의 `웹 UI 포트`(그리고 필요하면 `OSC 컨트롤 포트`)를 다르게 지정하세요.
 
 ## macOS (Apple Silicon) 실행 가이드
 
@@ -660,6 +682,7 @@ Mac 에서 달라지는 점:
 | LTC 가 LOCK 되지 않음 | 레벨 미터 확인(너무 작거나 클립), 채널(L/R) 확인, 브라우저 주소가 `localhost` 인지 |
 | 움직임이 끊김 / `타이밍 지터` 배지 | Windows 면 `정밀 타이밍` 켜기 (CPU 사용 증가), 전송 빈도를 낮추거나 번들 전송 사용 |
 | 태블릿에서 접속 안 됨 | 서버 시작 시 출력되는 `Network:` 주소 사용, 방화벽에서 Node.js 허용, `HOST` 가 `127.0.0.1` 이 아닌지 확인 |
+| Windows 알림 영역 앱 아이콘에 ⚠ | 메뉴 `로그 보기`, 또는 [`docs/WINDOWS-INSTALL.md`](docs/WINDOWS-INSTALL.md) 의 문제 해결 |
 | macOS 에서 `start-mac.command` 가 안 열림 | `chmod +x start-mac.command`, `xattr -dr com.apple.quarantine .`, 또는 우클릭 → 열기 (위 macOS 가이드) |
 | 세션을 불러왔는데 소리가 안 남 | 세션 불러오기는 START 를 누르지 않습니다. `출력 설정 유지` 를 끈 채 불러왔다면 출력 대상 IP·포트가 세션 값으로 바뀌었는지 확인 |
 | 화면이 한국어/영어로 나옴 | 상단 `EN | KO` 토글 (브라우저마다 따로 저장) |
@@ -686,7 +709,7 @@ npm test
 
 ## 만든 곳
 
-Objitter 는 **DREAMSCAPE** 가 만들었습니다. 앱 아이콘·메뉴 막대 아이콘·웹 UI 로고는 DREAMSCAPE 브랜드 로고 v3 입니다.
+Objitter 는 **DREAMSCAPE** 가 만들었습니다. 앱 아이콘·메뉴 막대 아이콘·Windows 알림 영역 아이콘·웹 UI 로고는 DREAMSCAPE 브랜드 로고 v3 입니다.
 회사 원본 디자인 자산(`artifacts/`)은 저장소에 넣지 않고, 앱에 쓰는 파생 파일만 `public/assets/`·`scripts/mac/assets/` 에 둡니다.
 
 ## 라이선스
