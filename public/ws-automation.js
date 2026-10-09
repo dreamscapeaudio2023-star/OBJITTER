@@ -10,6 +10,7 @@ const ROW_H = 76;
 const PAD = 9;
 const HEADER_W = 210;
 const HIT = 7;
+const MARKER_GAP = 6;
 const MODES = ['off', 'read', 'touch', 'latch', 'write'];
 const MODE_COLOR = { off: '#5b6680', read: '#4fd1a5', touch: '#f5b04a', latch: '#f08a4b', write: '#ff5d6c' };
 const POS_COLORS = ['#ff8a7a', '#7ee08f', '#79b8ff'];
@@ -113,6 +114,20 @@ export function createAutomation() {
   }
 
   // ---------------- drawing ----------------
+  /** On-screen points as [index, x]; markers only while they stay apart (dense recorded passes show just the curve). */
+  function visiblePoints(v, l) {
+    const off = offsetOf(l);
+    const vis = [];
+    let gap = Infinity;
+    pointsOf(l).forEach((p, k) => {
+      const x = v.xOf(off + p[0]);
+      if (x < v.headerW - 6 || x > v.w + 6) return;
+      if (vis.length) gap = Math.min(gap, x - vis[vis.length - 1][1]);
+      vis.push([k, x]);
+    });
+    return { vis, markers: gap >= MARKER_GAP };
+  }
+
   function drawLane(ctx, v, l, i) {
     const y0 = rowY(i);
     const pts = pointsOf(l);
@@ -122,15 +137,13 @@ export function createAutomation() {
     ctx.fillRect(v.headerW, y0, v.w - v.headerW, ROW_H);
     ctx.strokeStyle = '#1f2738';
     ctx.beginPath(); ctx.moveTo(v.headerW, y0 + ROW_H - 0.5); ctx.lineTo(v.w, y0 + ROW_H - 0.5); ctx.stroke();
-    if (l.param !== 'pos') {
-      const [lo, hi] = rangeOf(l);
-      if (lo < 0 && hi > 0) {
-        const yz = Math.round(yOfV(l, 0, y0)) + 0.5;
-        ctx.strokeStyle = 'rgba(90,102,128,.35)';
-        ctx.setLineDash([3, 4]);
-        ctx.beginPath(); ctx.moveTo(v.headerW, yz); ctx.lineTo(v.w, yz); ctx.stroke();
-        ctx.setLineDash([]);
-      }
+    const [lo, hi] = rangeOf(l);
+    if (lo < 0 && hi > 0) {
+      const yz = Math.round(yOfV(l, 0, y0)) + 0.5;
+      ctx.strokeStyle = 'rgba(90,102,128,.35)';
+      ctx.setLineDash([3, 4]);
+      ctx.beginPath(); ctx.moveTo(v.headerW, yz); ctx.lineTo(v.w, yz); ctx.stroke();
+      ctx.setLineDash([]);
     }
     if (range && range.id === l.id) {
       const a = v.xOf(off + Math.min(range.a, range.b));
@@ -171,26 +184,27 @@ export function createAutomation() {
       ctx.lineWidth = 1;
       ctx.globalAlpha = 1;
     }
-    // points
-    pts.forEach((p, k) => {
-      const x = v.xOf(off + p[0]);
-      if (x < v.headerW - 6 || x > v.w + 6) return;
+    const { vis, markers } = visiblePoints(v, l);
+    for (const [k, x] of vis) {
       const on = sel && selPts.has(k);
-      if (l.param === 'pos') {
-        ctx.fillStyle = on ? '#fff' : '#c7cfe0';
-        ctx.fillRect(x - 2, y0 + 3, 4, ROW_H - 6);
-        return;
+      if (!on && !markers) continue;
+      const p = pts[k];
+      if (on && l.param === 'pos') {
+        ctx.strokeStyle = 'rgba(79,209,165,.45)';
+        ctx.beginPath(); ctx.moveTo(Math.round(x) + 0.5, y0 + 2); ctx.lineTo(Math.round(x) + 0.5, y0 + ROW_H - 2); ctx.stroke();
       }
-      const y = yOfV(l, p[1], y0);
-      ctx.beginPath();
-      ctx.arc(x, y, on ? 4.5 : 3.5, 0, Math.PI * 2);
-      ctx.fillStyle = on ? '#ffffff' : '#0d1119';
-      ctx.fill();
-      ctx.strokeStyle = on ? '#4fd1a5' : MODE_COLOR[dim ? 'off' : 'read'];
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      ctx.lineWidth = 1;
-    });
+      for (const c of comps) {
+        const y = c === null ? yOfV(l, p[1], y0) : yOfV(l, p[1][c], y0);
+        ctx.beginPath();
+        ctx.arc(x, y, on ? 4 : c === null ? 3.5 : 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = on ? '#ffffff' : '#0d1119';
+        ctx.fill();
+        ctx.strokeStyle = on ? '#4fd1a5' : c === null ? MODE_COLOR[dim ? 'off' : 'read'] : POS_COLORS[c];
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.lineWidth = 1;
+      }
+    }
     // recording trail
     const tr = trails.get(l.id);
     if (tr?.length > 1) {
@@ -215,11 +229,14 @@ export function createAutomation() {
     // live value at the playhead
     const live = store.AUTOS?.vals?.[l.id];
     const ph = tl?.playheadNow();
-    if (live !== undefined && live !== null && ph !== null && l.param !== 'pos') {
+    if (live !== undefined && live !== null && ph !== null) {
       const x = v.xOf(ph);
-      const y = yOfV(l, live, y0);
       ctx.fillStyle = '#ff5d6c';
-      ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI * 2); ctx.fill();
+      for (const c of comps) {
+        const lv = c === null ? live : live[c];
+        if (typeof lv !== 'number') continue;
+        ctx.beginPath(); ctx.arc(x, yOfV(l, lv, y0), 3, 0, Math.PI * 2); ctx.fill();
+      }
     }
     if (!pts.length && !tr) {
       ctx.fillStyle = '#5b6680';
@@ -252,6 +269,16 @@ export function createAutomation() {
       ctx.font = '11px system-ui, sans-serif';
       ctx.fillStyle = '#8a95ad';
       ctx.fillText(paramLabel(l.param), 10, y0 + 33);
+      if (l.param === 'pos') {
+        let lx = 10 + ctx.measureText(paramLabel(l.param)).width + 8;
+        ctx.font = '700 10px system-ui, sans-serif';
+        ['X', 'Y', 'Z'].forEach((s, c) => {
+          ctx.fillStyle = POS_COLORS[c];
+          ctx.fillText(s, lx, y0 + 33);
+          lx += 11;
+        });
+        ctx.font = '11px system-ui, sans-serif';
+      }
       ctx.fillStyle = ownerMissing(l) ? '#f5b04a' : '#5b6680';
       const ownerTxt = l.owner === 'show' ? t('auto.owner.show') : ownerMissing(l) ? t('auto.owner.missing') : t('auto.owner.cueShort', { cue: cueLabel(l.owner) });
       ctx.fillText(ownerTxt.length > 22 ? `${ownerTxt.slice(0, 21)}…` : ownerTxt, 10, y0 + 50);
@@ -311,9 +338,11 @@ export function createAutomation() {
     }
     const pts = pointsOf(l);
     const off = offsetOf(l);
+    const markers = visiblePoints(tl.v, l).markers;
     let best = -1;
     let bestD = HIT;
     pts.forEach((pt, k) => {
+      if (!markers && !(l.id === selLane && selPts.has(k))) return;
       const dx = Math.abs(tl.v.xOf(off + pt[0]) - p.x);
       const d = l.param === 'pos' ? dx : Math.hypot(dx, yOfV(l, pt[1], y0) - p.cy);
       if (d <= bestD) { bestD = d; best = k; }
