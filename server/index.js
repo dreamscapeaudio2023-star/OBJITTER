@@ -1885,6 +1885,7 @@ function staticInfo() {
     },
     network: { http: HTTP_PORT, host: HOST ?? null, lan: lanUrls(), platform: process.platform, caffeinate: caffeinateActive },
     version: APP_VERSION,
+    features: ['control.ws'],
   };
 }
 
@@ -2089,6 +2090,17 @@ function handleClientMessage(ws, m) {
       showLock = v;
       toast(L(v ? 'srv.lock.on' : 'srv.lock.off', { who: ws.label }), v ? 'info' : 'warn');
       break;
+    }
+    case 'control': {
+      // Same command set and Show Lock rules as the OSC control input, for clients that can't rely on UDP
+      // reaching this instance (e.g. the control port is held by another program). Not subject to control.allow:
+      // a WebSocket client already passed the host/origin checks and has full UI access.
+      if (typeof m.address !== 'string' || m.address.length > 512 || !Array.isArray(m.args) || m.args.length > 16) return;
+      const args = m.args.filter((v) => (typeof v === 'number' && Number.isFinite(v)) || typeof v === 'string' || typeof v === 'boolean');
+      if (args.length !== m.args.length) return;
+      if (oscLog.active) oscLog.add('in', `ws:${ws.label}`, m.address, args);
+      handleControlMessage({ address: m.address, args });
+      return;
     }
     case 'tc.frame': {
       if (!tcSource || tcSource.ws !== ws || m.kind !== cues.settings.input || typeof m.tc !== 'string') return;

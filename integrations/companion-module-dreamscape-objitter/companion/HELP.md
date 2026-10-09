@@ -2,8 +2,8 @@
 
 Controls **Objitter**, the immersive-audio object motion controller by DREAMSCAPE Inc.
 
-- **Commands** are sent as **OSC over UDP** to Objitter's control input (default port `9000`, see Objitter → Setup → System → OSC control).
-- **Feedback, variables and dropdown lists** come from the Objitter web server over **WebSocket** (`ws://host:8080/ws`, read-only). Turn it off in the connection settings to run OSC-only.
+- **Feedback, variables and dropdown lists** come from the Objitter web server over **WebSocket** (`ws://host:8080/ws`). Turn it off in the connection settings to run OSC-only.
+- **Commands** go over that same WebSocket while it is connected (Objitter that supports it), so they always reach the Objitter you see in Companion. Without the link (feedback off, or an older Objitter) they are sent as **OSC over UDP** to Objitter's control input (default port `9000`, see Objitter → Setup → System → OSC control). Show Lock rules are the same either way.
 
 ### Connection settings
 
@@ -59,4 +59,5 @@ Buttons placed from an older version of these presets do not change when the mod
 ### Troubleshooting
 
 - *Status "Connection failure"*: check host / web port, firewall (TCP 8080), and `ALLOWED_HOSTS` (HTTP 403). OSC commands are still sent.
-- *Buttons do nothing*: check the OSC control port, Objitter's top bar `CTRL` indicator, the OSC **Allowed IPs** list and Setup → OSC log (denied packets show as `deny`).
+- *Status warning "Commands will not reach this Objitter"*: the connected Objitter's OSC input is off, on another port, or failed (e.g. `UDP port 9000 is in use by another program` — usually a second Objitter running on the same PC). Quit the other Objitter or give each its own ports, or update Objitter so commands use the WebSocket.
+- *Buttons do nothing*: check the connection status / log first, then the OSC control port, Objitter's top bar `CTRL` indicator, the OSC **Allowed IPs** list and Setup → OSC log (denied packets show as `deny`).

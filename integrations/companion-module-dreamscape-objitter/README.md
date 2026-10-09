@@ -2,9 +2,9 @@
 
 [Bitfocus Companion](https://bitfocus.io/companion) 에서 **DREAMSCAPE Objitter** 를 제어하는 모듈입니다 (Stream Deck, 웹 버튼, 다른 쇼 컨트롤에서 쓰기).
 
-- **명령**: Objitter 의 OSC 컨트롤 입력(UDP, 기본 `9000`)으로 보냅니다. Objitter README 의 "OSC 컨트롤 입력" 주소 그대로이며, 쇼 잠금 규칙도 Objitter 가 그대로 적용합니다.
-- **피드백·변수·목록**: Objitter 웹 서버의 WebSocket(`ws://호스트:8080/ws`)에 **읽기 전용**으로 붙어 상태를 받습니다. 편집 메시지는 보내지 않으며, 예외는 OSC 주소가 없는 **쇼 잠금**(`lock.set`)과 **라이브러리 적용**(`lib.apply`) 두 액션뿐입니다.
-- Objitter 서버 코드·환경 변수는 바꾸지 않습니다.
+- **피드백·변수·목록**: Objitter 웹 서버의 WebSocket(`ws://호스트:8080/ws`)으로 상태를 받습니다.
+- **명령**: WebSocket 이 연결되어 있고 Objitter 가 지원하면(`static.features` 에 `control.ws`) 같은 WebSocket 으로 `{ type: 'control', address, args }` 를 보냅니다 → 피드백을 보여 주는 바로 그 Objitter 로 갑니다. 연결이 없거나(피드백 끔) 예전 Objitter 면 OSC 컨트롤 입력(UDP, 기본 `9000`)으로 보냅니다. 두 경로 모두 Objitter 의 같은 OSC 명령 처리기를 거치므로 주소·인자·쇼 잠금 규칙이 같습니다. 그 밖의 WebSocket 메시지는 OSC 주소가 없는 **쇼 잠금**(`lock.set`)과 **라이브러리 적용**(`lib.apply`) 두 가지뿐입니다.
+- OSC 로 보낼 때 연결된 Objitter 의 OSC 입력이 꺼짐 / 다른 포트 / 오류(예: `UDP port 9000 is in use by another program` — 같은 PC 에 Objitter 가 두 개 떠 있는 경우)이면 연결 상태에 경고를 띄우고 로그에 남깁니다. OSC 송신 오류도 경고로 표시합니다.
 
 > 회사 내부(UNLICENSED) 모듈입니다. Companion 공식 모듈 목록(MIT 필수)에는 올리지 않고, 아래처럼 직접 설치해서 씁니다.
 
@@ -21,13 +21,13 @@ Node.js 22 이상이 필요합니다.
 ```powershell
 cd integrations\companion-module-dreamscape-objitter
 npm install
-npm run package        # → dreamscape-objitter-1.0.1.tgz 와 pkg\ 폴더 생성
+npm run package        # → dreamscape-objitter-1.0.2.tgz 와 pkg\ 폴더 생성
 ```
 
 ### 2-A) Companion 4.x — 패키지 가져오기 (권장)
 
 1. Companion 관리 화면 → **Modules** 탭
-2. **Import module package** (모듈 패키지 가져오기) → `dreamscape-objitter-1.0.1.tgz` 선택
+2. **Import module package** (모듈 패키지 가져오기) → `dreamscape-objitter-1.0.2.tgz` 선택
 3. **Connections** 탭 → **+ Add connection** → `DREAMSCAPE Objitter` 검색 → 추가
 4. 연결 설정(아래 "연결 설정")을 입력하고 저장
 
@@ -127,6 +127,7 @@ npm run preview       # 모든 프리셋 미리보기 PNG (Windows, %TEMP%\objit
 
 - `test/actions.test.js`: UDP 수신 소켓을 열고 모든 액션이 Objitter 가 기대하는 OSC 주소·인자·타입 태그를 정확히 보내는지, WebSocket 전용 액션의 메시지, 잘못된 입력·연결 없음 처리, 피드백·변수·프리셋 정의를 확인합니다.
 - `test/integration.test.js`: 저장소의 `server/index.js` 를 임시 폴더(`DATA_DIR`/`PRESET_DIR`/`LIBRARY_DIR`)와 포트 `18700`(웹)/`19700`(OSC)로 띄우고(`OBJITTER_TEST_PORT`, `OBJITTER_TEST_CONTROL_PORT` 로 변경), 액션으로 START·슬롯/프리셋 호출·BPM·TAP·속도·FREEZE·쇼 잠금·GO/BACK/NEXT/대기·내부 클럭 LOCATE/PLAY/PAUSE/REWIND·STOP 을 실행한 뒤 WebSocket 상태·변수·피드백이 바뀌는지, 서버 재시작 후 자동 재접속하는지 확인합니다. 끝나면 서버를 끄고 임시 폴더를 지웁니다.
+- `test/split.test.js`: Objitter 두 개(웹 `18900`/`18901`, 같은 OSC `19900`)를 띄워 두 번째가 `EADDRINUSE` 가 되는 상황을 재현합니다. OSC 만 쓰면(1.0.1 동작) `127.0.0.1`·`localhost`·LAN IP 모두 명령이 다른 인스턴스로 가는 것을 확인하고, 1.0.2 에서는 명령이 WebSocket 으로 피드백 인스턴스에 도달하며 쇼 잠금 규칙이 같고 OSC 문제·송신 오류가 보고되는지 확인합니다.
 - 루트 프로젝트의 `npm test` 와는 별개입니다 (루트 테스트는 이 폴더를 읽지 않음). Mac/Windows 설치 파일에도 포함되지 않습니다 (`server/`, `public/`, `demo/` 만 복사).
 
 ## 문제 해결
@@ -134,7 +135,8 @@ npm run preview       # 모든 프리셋 미리보기 PNG (Windows, %TEMP%\objit
 | 증상 | 확인 |
 | --- | --- |
 | 상태가 `Connection failure` | host·웹 포트, 방화벽(TCP 8080), `HTTP 403` 이면 `ALLOWED_HOSTS`. 이 상태에서도 OSC 명령은 보냅니다 |
-| 버튼을 눌러도 반응 없음 | OSC 컨트롤 포트, Objitter 상단 `CTRL` 표시, OSC `허용 IP`, Setup → OSC 로그(거부된 패킷은 `거부`) |
+| 상태 경고 `Commands will not reach this Objitter` | 연결된 Objitter 의 OSC 입력이 꺼짐/다른 포트/오류. 대개 같은 PC 에 Objitter 가 두 개(예: 개발 서버 8080 + 트레이 앱 8081) 떠서 두 번째가 UDP 9000 을 못 연 경우 → 하나를 끄거나 포트를 나누고, Objitter 를 업데이트하면 명령이 WebSocket 으로 갑니다 |
+| 버튼을 눌러도 반응 없음 | 연결 상태·로그 먼저 확인. 그다음 OSC 컨트롤 포트, Objitter 상단 `CTRL` 표시, OSC `허용 IP`, Setup → OSC 로그(거부된 패킷은 `거부`) |
 | 슬롯·프리셋 목록이 비어 있음 | WebSocket 피드백이 꺼져 있거나 연결 안 됨 → 직접 이름 입력은 가능 |
 | 토글·증감 버튼만 안 됨 | WebSocket 연결 필요 (Companion 로그에 경고) |
 | 오브젝트 편집·세션 불러오기가 안 됨 | Objitter 쇼 잠금 중 (잠금 해제 후 실행) |

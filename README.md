@@ -409,7 +409,9 @@ Node.js 로컬 서버가 모션 엔진·타임코드 큐 엔진·OSC(UDP) 송신
 
 ### Bitfocus Companion 모듈
 
-Stream Deck 등에서 위 명령을 버튼으로 쓰려면 [`integrations/companion-module-dreamscape-objitter`](integrations/companion-module-dreamscape-objitter/README.md) 의 Companion 모듈을 쓰세요. 명령은 이 OSC 컨트롤 입력으로 보내고, 상태 표시(피드백·변수·목록)는 웹 서버 WebSocket 을 읽기 전용으로 받습니다. 서버 설정·환경 변수는 바꿀 필요가 없습니다 (다른 PC 에서 DNS 이름으로 접속할 때만 `ALLOWED_HOSTS`).
+Stream Deck 등에서 위 명령을 버튼으로 쓰려면 [`integrations/companion-module-dreamscape-objitter`](integrations/companion-module-dreamscape-objitter/README.md) 의 Companion 모듈을 쓰세요. 상태 표시(피드백·변수·목록)는 웹 서버 WebSocket 으로 받고, 명령은 같은 WebSocket 의 `{ type: 'control', address, args }` 메시지(위 OSC 주소·인자 그대로, 같은 처리기·같은 쇼 잠금 규칙, OSC `허용 IP` 는 적용 안 됨)로 보냅니다. WebSocket 이 없으면 이 OSC 컨트롤 입력으로 보냅니다. 서버 설정·환경 변수는 바꿀 필요가 없습니다 (다른 PC 에서 DNS 이름으로 접속할 때만 `ALLOWED_HOSTS`).
+
+같은 PC 에 Objitter 를 두 개(예: `node server/index.js` 8080 + 트레이 앱 8081) 띄우면 OSC 컨트롤 포트(기본 9000)는 먼저 뜬 쪽만 열 수 있고, 나중 것은 `UDP port 9000 is in use by another program` 오류가 납니다. 이때 OSC 명령은 먼저 뜬 Objitter 로 갑니다.
 
 ## 타임코드 큐
 

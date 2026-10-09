@@ -15,6 +15,9 @@ class ObjitterState {
 		this.link = 'disconnected'
 		this.linkError = ''
 		this.version = ''
+		this.features = []
+		this.control = null
+		this.controlStatus = null
 		this.master = null
 		this.bpm = null
 		this.liveSpeed = null
@@ -40,6 +43,7 @@ class ObjitterState {
 		switch (m.type) {
 			case 'init':
 				this.version = m.static?.version ?? ''
+				this.features = Array.isArray(m.static?.features) ? m.static.features : []
 				this.applyState(m.state)
 				this.presets = Array.isArray(m.presets) ? m.presets : []
 				this.sessions = Array.isArray(m.sessions) ? m.sessions : []
@@ -93,8 +97,29 @@ class ObjitterState {
 		this.lastPreset = st.lastPreset ?? null
 		this.session = st.session ?? null
 		this.groups = Array.isArray(st.groups) ? st.groups : []
+		if (st.control) this.control = st.control
+		if (st.controlStatus) this.controlStatus = st.controlStatus
 		this.liveSpeed = null
 		return JSON.stringify(this.groups) !== groupsBefore
+	}
+
+	/** The connected server accepts commands over the WebSocket ('control' message). */
+	get wsControl() {
+		return this.features.includes('control.ws')
+	}
+
+	/**
+	 * Why OSC sent to `port` would not reach the Objitter this link is connected to, or '' when it should.
+	 * Typical case: two Objitter instances on one PC — the second one's control port is taken by the first,
+	 * so feedback shows one instance while OSC commands land on the other.
+	 */
+	oscProblem(port) {
+		if (!this.ready || !this.controlStatus) return ''
+		const cs = this.controlStatus
+		if (cs.state === 'disabled' || this.control?.enabled === false) return 'OSC control is turned off in this Objitter (Setup → System → OSC control)'
+		if (cs.state !== 'listening') return `this Objitter's OSC control input is not working: ${cs.message || cs.code || cs.state}`
+		if (Number(cs.port) !== Number(port)) return `this Objitter listens for OSC on UDP ${cs.port}, but the module sends to UDP ${port}`
+		return ''
 	}
 
 	applyTcDelta(m) {

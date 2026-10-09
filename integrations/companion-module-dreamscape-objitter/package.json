@@ -1,12 +1,12 @@
 {
   "name": "dreamscape-objitter",
-  "version": "1.0.1",
-  "description": "Bitfocus Companion module for DREAMSCAPE Objitter (OSC control + WebSocket feedback)",
+  "version": "1.0.2",
+  "description": "Bitfocus Companion module for DREAMSCAPE Objitter (WebSocket/OSC control + WebSocket feedback)",
   "main": "src/main.js",
   "type": "commonjs",
   "private": true,
   "scripts": {
-    "test": "node test/actions.test.js && node test/presets.test.js && node test/integration.test.js",
+    "test": "node test/actions.test.js && node test/presets.test.js && node test/integration.test.js && node test/split.test.js",
     "test:actions": "node test/actions.test.js",
     "test:presets": "node test/presets.test.js",
     "icons": "node scripts/gen-icons.js",
