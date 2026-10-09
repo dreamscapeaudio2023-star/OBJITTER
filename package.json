@@ -1,0 +1,21 @@
+{
+  "name": "objitter",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Random / tempo-synced object motion controller for immersive audio systems (SPAT Revolution, L-ISA, d&b Soundscape)",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node test/smoke.js",
+    "demo-presets": "node scripts/make-demo-presets.js"
+  },
+  "keywords": ["osc", "spat", "l-isa", "soundscape", "immersive", "audio"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}

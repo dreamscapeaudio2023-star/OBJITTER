@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Objitter — Immersive Object Motion</title>
+  <meta name="theme-color" content="#0b0f17" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Objitter" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tc.css" />
+  <link rel="stylesheet" href="ws.css" />
+</head>
+<body>
+  <div id="splash" class="splash" role="status" aria-live="polite">
+    <div class="splash-card">
+      <img class="splash-logo" src="assets/logo.svg" alt="" width="64" height="64" />
+      <div class="splash-name">OBJITTER</div>
+      <div class="splash-msg" data-i18n="ui.connecting">Connecting to server…</div>
+    </div>
+  </div>
+  <header class="topbar">
+    <div class="tb-zone tb-brand brand">
+      <button id="btnAbout" class="logo-btn" type="button" data-i18n-title="about.open" data-i18n-aria-label="about.open" title="About Objitter">
+        <img class="logo" src="assets/logo.svg" alt="" width="22" height="22" />
+        <span class="brand-name">OBJITTER</span>
+      </button>
+      <div class="conn-badges">
+        <span class="badge" id="conn" role="status" data-i18n-title="top.conn.title" title="Server connection">Connecting…</span>
+        <span class="badge" id="ctlStatus" data-i18n-title="top.ctl.title" title="OSC control input">OSC In —</span>
+      </div>
+    </div>
+    <button id="sessionBadge" class="badge session-badge none" type="button">
+      <span class="sess-lbl" data-i18n="top.session">Session</span><span class="sess-colon">:</span>
+      <span id="sessionName"></span><span id="sessionDirty" class="sess-dirty" hidden aria-hidden="true">•</span>
+    </button>
+
+    <div class="tb-zone tb-transport transport">
+      <button id="btnStart" class="btn-start" type="button" aria-keyshortcuts="Space" title="Space"><span class="bl" id="startLbl">▶ START</span><kbd class="cap">Space</kbd></button>
+      <button id="btnStop" class="btn-stop" type="button" data-i18n-title="top.stop.title" aria-keyshortcuts="Escape Shift+Escape"><span class="bl">■ STOP</span><kbd class="cap">Esc</kbd></button>
+      <button id="btnFreeze" class="btn-ghost btn-mode" type="button" aria-pressed="false" aria-keyshortcuts="F" data-i18n-title="top.freeze.title"><span class="bl">FREEZE</span><kbd class="cap">F</kbd></button>
+      <button id="btnHome" class="btn-ghost btn-mode" type="button" aria-keyshortcuts="H" data-i18n-title="top.home.title"><span class="bl">RETURN</span><kbd class="cap">H</kbd></button>
+      <div class="pop-host master" id="master">
+        <button id="btnMaster" class="btn-ghost master-btn" type="button" aria-expanded="false" aria-controls="masterPanel" data-i18n-title="top.master.title">
+          <span class="mst-l" data-i18n="top.master">Master</span>
+          <span class="mst-v mono" id="masterSum">1.00× · 1.5s</span>
+        </button>
+        <div class="master-panel" id="masterPanel" role="group" data-i18n-aria-label="top.master">
+          <label class="inline" for="speed" data-i18n-title="top.speed.title">
+            <span data-i18n="top.speed">Speed</span>
+            <input type="range" id="speed" min="0" max="4" step="0.05" />
+            <output id="speedOut" for="speed">1.00×</output>
+          </label>
+          <label class="inline" for="xf" data-i18n-title="top.xf.title">
+            <span data-i18n="top.fade">Fade</span>
+            <input type="range" id="xf" min="0" max="1000" step="1" />
+            <output id="xfOut" for="xf">1.5s</output>
+          </label>
+          <button id="btnResyncPop" class="resync-pop" type="button" aria-keyshortcuts="R" data-i18n-title="top.resync.title"><span><span aria-hidden="true">↻ </span><span data-i18n="top.resync">Re-sync</span></span><kbd>R</kbd></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tb-zone tb-tc">
+      <button class="tc-top disabled" id="tcTop" type="button" data-state="off" data-i18n-aria-label="tc.aria.open">
+        <span class="tc-time mono" id="tcTime">--:--:--:--</span>
+        <span class="tc-meta" id="tcMeta">TC</span>
+        <span class="tc-next mono" id="tcNext"></span>
+      </button>
+      <div id="tcTransport" class="tc-transport" hidden></div>
+      <div id="goBox" class="go-box" hidden></div>
+    </div>
+
+    <div class="tb-zone tb-tempo tempo">
+      <div class="bpm-box">
+        <label class="bpm-l" for="bpm">BPM</label>
+        <div class="beats" id="beats" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <input type="number" id="bpm" min="20" max="300" step="0.1" />
+      <div class="mult-step">
+        <button id="multDown" class="step" type="button" data-i18n-title="top.mult.down" data-i18n-aria-label="top.mult.down">−</button>
+        <div class="seg mult" id="tempoMult" role="group" data-i18n-aria-label="top.tempoMult"></div>
+        <button id="multUp" class="step" type="button" data-i18n-title="top.mult.up" data-i18n-aria-label="top.mult.up">+</button>
+      </div>
+      <button id="btnTap" class="btn-tap" type="button" aria-keyshortcuts="T" title="T"><span class="bl">TAP</span><kbd class="cap">T</kbd></button>
+      <button id="btnResync" class="btn-ghost btn-resync" type="button" aria-keyshortcuts="R" data-i18n-title="top.resync.title" data-i18n-aria-label="top.resync"><span class="rs-i" aria-hidden="true">↻</span><span class="rs-t" data-i18n="top.resync">Re-sync</span></button>
+    </div>
+
+    <div class="tb-zone tb-status out-status" id="outStatus">
+      <i class="out-dot" id="outDot" aria-hidden="true"></i>
+      <span id="outSystem">—</span>
+      <span id="outTarget" class="mono">—</span>
+      <span id="outMore" class="badge" hidden></span>
+      <span id="outHz" class="mono" data-i18n-title="top.outHz.title">— Hz</span>
+      <span id="outRate" class="mono" data-i18n-title="top.outRate.title">0 msg/s</span>
+      <span id="outErr" class="badge err" hidden></span>
+      <button id="vmaxBadge" class="badge vmax" type="button" hidden data-i18n-title="top.vmax.title">VMAX</button>
+      <button id="jitterBadge" class="badge warn" type="button" hidden data-i18n-title="top.jitter.title" data-i18n="top.jitter">Clock jitter</button>
+    </div>
+
+    <div class="tb-zone tb-modes">
+      <button id="btnLive" class="btn-ghost live on" type="button" aria-pressed="true" aria-keyshortcuts="L" data-i18n-title="top.live.title">LIVE EDIT</button>
+      <button id="btnLock" class="btn-ghost lock" type="button" aria-pressed="false" data-i18n-title="top.lock.title">
+        <svg class="lock-ic" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.5" fill="currentColor"/><path class="shackle" d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span id="lockLbl" data-i18n="top.lock">Lock</span>
+      </button>
+      <button id="btnHelp" class="btn-ghost icon-btn" type="button" aria-keyshortcuts="Shift+?" data-i18n-title="top.help.title" data-i18n-aria-label="top.help">?</button>
+      <div class="pop-host more" id="more">
+        <button id="btnMore" class="btn-ghost icon-btn more-btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="moreMenu" data-i18n-title="top.more" data-i18n-aria-label="top.more"><span class="more-lang" id="moreLang">EN</span><span aria-hidden="true">⋯</span></button>
+        <div class="more-menu" id="moreMenu" role="menu">
+          <div class="mm-row">
+            <span class="mm-lbl" data-i18n="top.language">Language</span>
+            <div class="seg lang-seg" id="langSeg" role="group" data-i18n-aria-label="top.language" aria-label="Language">
+              <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+              <button type="button" data-lang="ko" lang="ko" aria-pressed="false">KO</button>
+            </div>
+          </div>
+          <button type="button" role="menuitem" id="mmKeys"><span data-i18n="top.help">Keyboard shortcuts</span><kbd>?</kbd></button>
+          <button type="button" role="menuitem" id="mmSessions"><span data-i18n="sess.title">Sessions</span><kbd id="mmSessKey">Ctrl+O</kbd></button>
+          <button type="button" role="menuitem" id="mmAbout" data-i18n="about.title">About Objitter</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div id="offline" class="banner offline" role="alert" hidden></div>
+  <div id="warnBar" class="banner warn" role="status" hidden></div>
+
+  <main class="layout">
+    <section class="panel objects" data-i18n-aria-label="panel.objects">
+      <div class="panel-head">
+        <h2 data-i18n="panel.objects">Objects</h2>
+        <span class="muted" id="selInfo"></span>
+      </div>
+      <div class="obj-grid" id="objGrid" role="group" data-i18n-aria-label="panel.objectList"></div>
+      <div class="obj-actions">
+        <div class="btn-row">
+          <button data-act="selAll" data-i18n="obj.selAll" data-i18n-title="obj.selAll.title">Select all</button>
+          <button data-act="selActive" data-i18n="obj.selActive">Active</button>
+          <button data-act="selNone" data-i18n="obj.selNone" data-i18n-title="obj.selNone.title">Deselect</button>
+        </div>
+        <div class="btn-row">
+          <button data-act="enable" class="accent edit" data-i18n="obj.enable">Enable</button>
+          <button data-act="disable" class="edit" data-i18n="obj.disable">Disable</button>
+          <button data-act="home" data-i18n-title="obj.home.title" data-i18n="obj.home">Home</button>
+        </div>
+        <div class="btn-row two">
+          <button data-act="multi" id="btnMulti" aria-pressed="false" data-i18n-title="obj.multi.title" data-i18n="obj.multi">Multi-select</button>
+          <button data-act="undo" class="edit" data-i18n-title="obj.undo.title" data-i18n="obj.undo">Undo</button>
+        </div>
+      </div>
+      <div class="groups" id="groupsBox"></div>
+      <p class="hint" data-i18n="obj.hint">Click: select · Shift/Ctrl+click or Multi-select: several · Ctrl+A: select all · double-click/long-press: toggle enable · Esc: close open menu, otherwise STOP · Shift+Esc: always STOP</p>
+    </section>
+
+    <section class="panel stage" data-i18n-aria-label="panel.stage">
+      <div class="panel-head">
+        <h2 data-i18n="panel.stage">Stage</h2>
+        <div class="legend">
+          <label class="chk"><input type="checkbox" id="showRegions" checked /> <span data-i18n="stage.regions">Zones</span></label>
+          <label class="chk"><input type="checkbox" id="showTrails" checked /> <span data-i18n="stage.trails">Trails</span></label>
+          <label class="chk" id="showImageLbl" hidden><input type="checkbox" id="showImage" checked /> <span data-i18n="stage.image">Image</span></label>
+          <label class="chk" id="showSpeakersLbl" hidden><input type="checkbox" id="showSpeakers" checked /> <span data-i18n="stage.speakers">Speakers</span></label>
+        </div>
+      </div>
+      <div class="canvas-wrap top"><canvas id="topView" data-i18n-aria-label="stage.top"></canvas><div class="drag-info" id="dragInfo" hidden></div><div class="path-banner" id="pathBanner" role="status" hidden></div></div>
+      <div class="canvas-wrap side"><canvas id="sideView" data-i18n-aria-label="stage.side"></canvas></div>
+      <div class="slots-head">
+        <span data-i18n="slots.title">Quick Slots</span><span class="muted" id="slotHint" aria-live="polite" data-i18n-title="slots.hint.title" data-i18n="slots.hint"></span><span class="hint-short" data-i18n="slots.hintShort">Long-press to assign a preset</span>
+      </div>
+      <div class="slots" id="slots"></div>
+      <p class="hint" data-i18n="stage.hint">Drag: move the region center of the selection · drag empty space: rectangle select · tap empty space: deselect · drag in the front view below: height (Z)</p>
+    </section>
+
+    <section class="panel side-panel" data-i18n-aria-label="panel.settings">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" role="tab" id="tabbtn-edit" aria-selected="true" aria-controls="tab-edit" data-tab="edit" data-i18n="tab.edit">Motion</button>
+        <button class="tab" role="tab" id="tabbtn-tools" aria-selected="false" aria-controls="tab-tools" data-tab="tools" tabindex="-1" data-i18n="tab.tools">Arrange</button>
+        <button class="tab" role="tab" id="tabbtn-presets" aria-selected="false" aria-controls="tab-presets" data-tab="presets" tabindex="-1" data-i18n="tab.presets">Presets</button>
+        <button class="tab" role="tab" id="tabbtn-library" aria-selected="false" aria-controls="tab-library" data-tab="library" tabindex="-1" data-i18n="tab.library">Library</button>
+        <div class="ws-launch" id="wsLaunch" role="group" data-i18n-aria-label="ws.group"></div>
+      </nav>
+      <div class="tab-body active" id="tab-edit" role="tabpanel" aria-labelledby="tabbtn-edit"><div id="editor"></div></div>
+      <div class="tab-body" id="tab-tools" role="tabpanel" aria-labelledby="tabbtn-tools"></div>
+      <div class="tab-body" id="tab-presets" role="tabpanel" aria-labelledby="tabbtn-presets"></div>
+      <div class="tab-body" id="tab-library" role="tabpanel" aria-labelledby="tabbtn-library"></div>
+    </section>
+  </main>
+
+  <div class="slot-menu" id="slotMenu" role="menu" hidden></div>
+  <div class="confirm-bar" id="confirmBar" role="alertdialog" aria-live="assertive" hidden></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <button id="floatStop" class="float-stop" type="button" hidden data-i18n-title="top.stop.title" data-i18n-aria-label="top.stop">■ STOP</button>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

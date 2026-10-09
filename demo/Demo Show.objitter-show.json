@@ -1,0 +1,124 @@
+{
+  "app": "objitter",
+  "kind": "show",
+  "version": 2,
+  "name": "Demo Show (internal clock)",
+  "timecode": {
+    "settings": {
+      "rate": "25",
+      "offset": "+00:00:00:00",
+      "chase": true,
+      "chaseFade": 0.3,
+      "freewheel": 0.5,
+      "autoStart": false,
+      "onLoss": "hold",
+      "preroll": 2,
+      "trigger": "tc"
+    },
+    "cues": [
+      {
+        "tc": "00:00:02:00",
+        "label": "Intro breath",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Subtle Breath",
+        "fade": 2
+      },
+      {
+        "tc": "00:00:04:00",
+        "label": "Run",
+        "enabled": true,
+        "action": "start"
+      },
+      {
+        "tc": "00:00:08:00",
+        "label": "Swarm front",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Jitter Swarm",
+        "fade": 1.5,
+        "targets": "1-12",
+        "curve": "out",
+        "stagger": 0.6,
+        "staggerOrder": "id"
+      },
+      {
+        "tc": "00:00:14:00",
+        "label": "Orbits",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Slow Orbit & Drift",
+        "fade": 3,
+        "targets": "1-8",
+        "curve": "smooth"
+      },
+      {
+        "tc": "00:00:20:00",
+        "label": "Tempo 120",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Tempo Glide",
+        "fade": 1,
+        "bpm": 120,
+        "anchorBeat": true
+      },
+      {
+        "tc": "00:00:26:00",
+        "label": "Jump vs slide",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Jump vs Slide",
+        "fade": 0,
+        "anchorBeat": true
+      },
+      {
+        "tc": "00:00:32:00",
+        "label": "Stabs",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Stab & Hold",
+        "fade": 0.5,
+        "globals": "preset",
+        "seedOffset": 1
+      },
+      {
+        "tc": "00:00:38:00",
+        "label": "Freeze",
+        "enabled": true,
+        "action": "freeze"
+      },
+      {
+        "tc": "00:00:40:00",
+        "label": "Release",
+        "enabled": true,
+        "action": "unfreeze"
+      },
+      {
+        "tc": "00:00:44:00",
+        "label": "Home 1-4",
+        "enabled": true,
+        "action": "home",
+        "fade": 2,
+        "targets": "1-4",
+        "stagger": 0.4,
+        "staggerOrder": "distance"
+      },
+      {
+        "tc": "00:00:48:00",
+        "label": "Waypoints",
+        "enabled": true,
+        "action": "slot",
+        "preset": "Demo - Linear Waypoints",
+        "fade": 2
+      },
+      {
+        "tc": "00:00:56:00",
+        "label": "Stop",
+        "enabled": true,
+        "action": "stop"
+      }
+    ]
+  },
+  "groups": [],
+  "slots": []
+}

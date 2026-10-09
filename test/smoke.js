@@ -1,0 +1,10 @@
+const unit = await import('./unit.js');
+let failed = await unit.default();
+const timecode = await import('./timecode.js');
+failed += await timecode.default();
+const features = await import('./features.js');
+failed += await features.default();
+const server = await import('./server.js');
+failed += await server.default();
+console.log(failed ? `\n${failed} test(s) failed.` : '\nAll tests passed.');
+process.exit(failed ? 1 : 0);

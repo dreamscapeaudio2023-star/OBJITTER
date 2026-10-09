@@ -1,0 +1,40 @@
+node_modules/
+
+# runtime / personal data (state, sessions, uploaded stage assets, library)
+data/
+library/
+sessions/
+uploads/
+*.objitter-session.json
+state.json
+state.json.*
+
+# user presets — only the shipped demo presets are versioned
+presets/*
+!presets/Demo - *.json
+
+# renderer project files used for local testing (SPAT / L-ISA sessions)
+example/
+
+# secrets
+.env
+.env.*
+*.pem
+*.key
+
+# logs, temp, backups
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+*.bak
+*.orig
+*~
+*.corrupt-*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

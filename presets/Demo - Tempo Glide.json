@@ -1,0 +1,1454 @@
+{
+  "app": "objitter",
+  "version": 2,
+  "name": "Demo - Tempo Glide",
+  "savedAt": "2026-10-07T00:24:07.835Z",
+  "slot": 3,
+  "color": "green",
+  "note": "Tempo-synced glides, mixed divisions",
+  "bpm": 120,
+  "speed": 1,
+  "tempoMult": 1,
+  "objects": [
+    {
+      "id": 1,
+      "enabled": true,
+      "name": "Tempo 1",
+      "sourceId": 1,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 0.6,
+      "easing": "smooth",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 2,
+      "enabled": true,
+      "name": "Tempo 2",
+      "sourceId": 2,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "ring",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          0.5,
+          1
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 0.9,
+      "easing": "inOut",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 3,
+      "enabled": true,
+      "name": "Tempo 3",
+      "sourceId": 3,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          2,
+          4
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 4,
+      "enabled": true,
+      "name": "Tempo 4",
+      "sourceId": 4,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "ring",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          0.3333333333333333,
+          0.6666666666666666
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 0.5,
+      "easing": "smooth",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 5,
+      "enabled": true,
+      "name": "Tempo 5",
+      "sourceId": 5,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          1.5
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 0.75,
+      "easing": "inOut",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 6,
+      "enabled": true,
+      "name": "Tempo 6",
+      "sourceId": 6,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "ring",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          0.75,
+          1.5
+        ],
+        "tempoMode": "length",
+        "phaseOffset": 0
+      },
+      "glide": 0.8,
+      "easing": "inOut",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 7,
+      "enabled": true,
+      "name": "Tempo 7",
+      "sourceId": 7,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          4
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0.5
+      },
+      "glide": 1,
+      "easing": "smooth",
+      "jumpChance": 0.05,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 8,
+      "enabled": true,
+      "name": "Tempo 8",
+      "sourceId": 8,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0.1,
+        "z": 0.15
+      },
+      "range": {
+        "x": 0.85,
+        "y": 0.75,
+        "z": 0.25
+      },
+      "rangeShape": "ring",
+      "innerRadius": 0.4,
+      "timing": {
+        "sync": "tempo",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2,
+          4
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 0.4,
+      "easing": "inOut",
+      "jumpChance": 0.25,
+      "jumpSlew": 20,
+      "restChance": 0.1,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 9,
+      "enabled": false,
+      "name": "Obj 9",
+      "sourceId": 9,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 10,
+      "enabled": false,
+      "name": "Obj 10",
+      "sourceId": 10,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 11,
+      "enabled": false,
+      "name": "Obj 11",
+      "sourceId": 11,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 12,
+      "enabled": false,
+      "name": "Obj 12",
+      "sourceId": 12,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 13,
+      "enabled": false,
+      "name": "Obj 13",
+      "sourceId": 13,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 14,
+      "enabled": false,
+      "name": "Obj 14",
+      "sourceId": 14,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 15,
+      "enabled": false,
+      "name": "Obj 15",
+      "sourceId": 15,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 16,
+      "enabled": false,
+      "name": "Obj 16",
+      "sourceId": 16,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 17,
+      "enabled": false,
+      "name": "Obj 17",
+      "sourceId": 17,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 18,
+      "enabled": false,
+      "name": "Obj 18",
+      "sourceId": 18,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 19,
+      "enabled": false,
+      "name": "Obj 19",
+      "sourceId": 19,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 20,
+      "enabled": false,
+      "name": "Obj 20",
+      "sourceId": 20,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 21,
+      "enabled": false,
+      "name": "Obj 21",
+      "sourceId": 21,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 22,
+      "enabled": false,
+      "name": "Obj 22",
+      "sourceId": 22,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 23,
+      "enabled": false,
+      "name": "Obj 23",
+      "sourceId": 23,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 24,
+      "enabled": false,
+      "name": "Obj 24",
+      "sourceId": 24,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 25,
+      "enabled": false,
+      "name": "Obj 25",
+      "sourceId": 25,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 26,
+      "enabled": false,
+      "name": "Obj 26",
+      "sourceId": 26,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 27,
+      "enabled": false,
+      "name": "Obj 27",
+      "sourceId": 27,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 28,
+      "enabled": false,
+      "name": "Obj 28",
+      "sourceId": 28,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 29,
+      "enabled": false,
+      "name": "Obj 29",
+      "sourceId": 29,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 30,
+      "enabled": false,
+      "name": "Obj 30",
+      "sourceId": 30,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 31,
+      "enabled": false,
+      "name": "Obj 31",
+      "sourceId": 31,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 32,
+      "enabled": false,
+      "name": "Obj 32",
+      "sourceId": 32,
+      "mode": "glide",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "range": {
+        "x": 0.6,
+        "y": 0.6,
+        "z": 0
+      },
+      "rangeShape": "box",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.25,
+      "driftDepth": 1,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    }
+  ]
+}

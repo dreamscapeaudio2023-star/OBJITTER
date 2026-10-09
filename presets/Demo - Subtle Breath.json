@@ -1,0 +1,1454 @@
+{
+  "app": "objitter",
+  "version": 2,
+  "name": "Demo - Subtle Breath",
+  "savedAt": "2026-10-07T00:24:07.844Z",
+  "slot": 5,
+  "color": "purple",
+  "note": "All 32: tiny drift around a ring",
+  "bpm": 120,
+  "speed": 1,
+  "tempoMult": 1,
+  "objects": [
+    {
+      "id": 1,
+      "enabled": true,
+      "name": "Breath 1",
+      "sourceId": 1,
+      "mode": "drift",
+      "center": {
+        "x": 0,
+        "y": 0.6,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 2,
+      "enabled": true,
+      "name": "Breath 2",
+      "sourceId": 2,
+      "mode": "drift",
+      "center": {
+        "x": 0.156,
+        "y": 0.785,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 3,
+      "enabled": true,
+      "name": "Breath 3",
+      "sourceId": 3,
+      "mode": "drift",
+      "center": {
+        "x": 0.23,
+        "y": 0.554,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 4,
+      "enabled": true,
+      "name": "Breath 4",
+      "sourceId": 4,
+      "mode": "drift",
+      "center": {
+        "x": 0.444,
+        "y": 0.665,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 5,
+      "enabled": true,
+      "name": "Breath 5",
+      "sourceId": 5,
+      "mode": "drift",
+      "center": {
+        "x": 0.424,
+        "y": 0.424,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 6,
+      "enabled": true,
+      "name": "Breath 6",
+      "sourceId": 6,
+      "mode": "drift",
+      "center": {
+        "x": 0.665,
+        "y": 0.444,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 7,
+      "enabled": true,
+      "name": "Breath 7",
+      "sourceId": 7,
+      "mode": "drift",
+      "center": {
+        "x": 0.554,
+        "y": 0.23,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 8,
+      "enabled": true,
+      "name": "Breath 8",
+      "sourceId": 8,
+      "mode": "drift",
+      "center": {
+        "x": 0.785,
+        "y": 0.156,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 9,
+      "enabled": true,
+      "name": "Breath 9",
+      "sourceId": 9,
+      "mode": "drift",
+      "center": {
+        "x": 0.6,
+        "y": 0,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 10,
+      "enabled": true,
+      "name": "Breath 10",
+      "sourceId": 10,
+      "mode": "drift",
+      "center": {
+        "x": 0.785,
+        "y": -0.156,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 11,
+      "enabled": true,
+      "name": "Breath 11",
+      "sourceId": 11,
+      "mode": "drift",
+      "center": {
+        "x": 0.554,
+        "y": -0.23,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 12,
+      "enabled": true,
+      "name": "Breath 12",
+      "sourceId": 12,
+      "mode": "drift",
+      "center": {
+        "x": 0.665,
+        "y": -0.444,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 13,
+      "enabled": true,
+      "name": "Breath 13",
+      "sourceId": 13,
+      "mode": "drift",
+      "center": {
+        "x": 0.424,
+        "y": -0.424,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 14,
+      "enabled": true,
+      "name": "Breath 14",
+      "sourceId": 14,
+      "mode": "drift",
+      "center": {
+        "x": 0.444,
+        "y": -0.665,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 15,
+      "enabled": true,
+      "name": "Breath 15",
+      "sourceId": 15,
+      "mode": "drift",
+      "center": {
+        "x": 0.23,
+        "y": -0.554,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 16,
+      "enabled": true,
+      "name": "Breath 16",
+      "sourceId": 16,
+      "mode": "drift",
+      "center": {
+        "x": 0.156,
+        "y": -0.785,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 17,
+      "enabled": true,
+      "name": "Breath 17",
+      "sourceId": 17,
+      "mode": "drift",
+      "center": {
+        "x": 0,
+        "y": -0.6,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 18,
+      "enabled": true,
+      "name": "Breath 18",
+      "sourceId": 18,
+      "mode": "drift",
+      "center": {
+        "x": -0.156,
+        "y": -0.785,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 19,
+      "enabled": true,
+      "name": "Breath 19",
+      "sourceId": 19,
+      "mode": "drift",
+      "center": {
+        "x": -0.23,
+        "y": -0.554,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 20,
+      "enabled": true,
+      "name": "Breath 20",
+      "sourceId": 20,
+      "mode": "drift",
+      "center": {
+        "x": -0.444,
+        "y": -0.665,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 21,
+      "enabled": true,
+      "name": "Breath 21",
+      "sourceId": 21,
+      "mode": "drift",
+      "center": {
+        "x": -0.424,
+        "y": -0.424,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 22,
+      "enabled": true,
+      "name": "Breath 22",
+      "sourceId": 22,
+      "mode": "drift",
+      "center": {
+        "x": -0.665,
+        "y": -0.444,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 23,
+      "enabled": true,
+      "name": "Breath 23",
+      "sourceId": 23,
+      "mode": "drift",
+      "center": {
+        "x": -0.554,
+        "y": -0.23,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 24,
+      "enabled": true,
+      "name": "Breath 24",
+      "sourceId": 24,
+      "mode": "drift",
+      "center": {
+        "x": -0.785,
+        "y": -0.156,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 25,
+      "enabled": true,
+      "name": "Breath 25",
+      "sourceId": 25,
+      "mode": "drift",
+      "center": {
+        "x": -0.6,
+        "y": 0,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 26,
+      "enabled": true,
+      "name": "Breath 26",
+      "sourceId": 26,
+      "mode": "drift",
+      "center": {
+        "x": -0.785,
+        "y": 0.156,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 27,
+      "enabled": true,
+      "name": "Breath 27",
+      "sourceId": 27,
+      "mode": "drift",
+      "center": {
+        "x": -0.554,
+        "y": 0.23,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 28,
+      "enabled": true,
+      "name": "Breath 28",
+      "sourceId": 28,
+      "mode": "drift",
+      "center": {
+        "x": -0.665,
+        "y": 0.444,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.074,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 29,
+      "enabled": true,
+      "name": "Breath 29",
+      "sourceId": 29,
+      "mode": "drift",
+      "center": {
+        "x": -0.424,
+        "y": 0.424,
+        "z": 0.35
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.086,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 30,
+      "enabled": true,
+      "name": "Breath 30",
+      "sourceId": 30,
+      "mode": "drift",
+      "center": {
+        "x": -0.444,
+        "y": 0.665,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.098,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 31,
+      "enabled": true,
+      "name": "Breath 31",
+      "sourceId": 31,
+      "mode": "drift",
+      "center": {
+        "x": -0.23,
+        "y": 0.554,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.05,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    },
+    {
+      "id": 32,
+      "enabled": true,
+      "name": "Breath 32",
+      "sourceId": 32,
+      "mode": "drift",
+      "center": {
+        "x": -0.156,
+        "y": 0.785,
+        "z": 0.1
+      },
+      "range": {
+        "x": 0.08,
+        "y": 0.08,
+        "z": 0.05
+      },
+      "rangeShape": "ellipse",
+      "innerRadius": 0.5,
+      "timing": {
+        "sync": "free",
+        "min": 1,
+        "max": 3,
+        "divisions": [
+          1,
+          2
+        ],
+        "tempoMode": "grid",
+        "phaseOffset": 0
+      },
+      "glide": 1,
+      "easing": "inOut",
+      "jumpChance": 0,
+      "jumpSlew": 20,
+      "restChance": 0,
+      "minStep": 0.3,
+      "pathPoints": 4,
+      "pathRegen": true,
+      "pathOrder": "loop",
+      "pathCurve": "linear",
+      "driftRate": 0.062,
+      "driftDepth": 0.9,
+      "orbitDir": "cw",
+      "speedScale": 1,
+      "seed": 0
+    }
+  ]
+}
