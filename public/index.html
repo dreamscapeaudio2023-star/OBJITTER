@@ -8,10 +8,13 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Objitter" />
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="author" content="DREAMSCAPE Inc." />
+  <meta name="copyright" content="© 2026 DREAMSCAPE Inc. All rights reserved." />
+  <link rel="icon" href="favicon.ico?v=ds3" sizes="16x16 32x32 48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=ds3" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=ds3" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v=ds3" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=ds3" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="tc.css" />
@@ -20,15 +23,16 @@
 <body>
   <div id="splash" class="splash" role="status" aria-live="polite">
     <div class="splash-card">
-      <img class="splash-logo" src="assets/logo.svg" alt="" width="64" height="64" />
+      <img class="splash-logo" src="assets/dreamscape-128.png" alt="DREAMSCAPE" width="72" height="72" />
       <div class="splash-name">OBJITTER</div>
+      <div class="splash-by" data-i18n="about.madeBy">Made by DREAMSCAPE</div>
       <div class="splash-msg" data-i18n="ui.connecting">Connecting to server…</div>
     </div>
   </div>
   <header class="topbar">
     <div class="tb-zone tb-brand brand">
       <button id="btnAbout" class="logo-btn" type="button" data-i18n-title="about.open" data-i18n-aria-label="about.open" title="About Objitter">
-        <img class="logo" src="assets/logo.svg" alt="" width="22" height="22" />
+        <img class="logo" src="assets/dreamscape-48.png" alt="" width="22" height="22" />
         <span class="brand-name">OBJITTER</span>
       </button>
       <div class="conn-badges">

@@ -157,7 +157,7 @@ kbd { font-family: var(--mono); font-size: var(--fs-xs); padding: 1px 6px; borde
   background: transparent; border-color: transparent;
 }
 .logo-btn:hover { background: var(--panel2); border-color: var(--line2); }
-.logo { display: block; width: 22px; height: 22px; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 30%, transparent)); }
+.logo { display: block; flex: none; width: 22px; height: 22px; }
 .brand-name { font-weight: 800; letter-spacing: .18em; font-size: var(--fs-lg); margin: 0 2px; }
 /* connection + OSC-in state: 8 px dots, details in the tooltip */
 .conn-badges { display: flex; flex-direction: column; gap: 5px; }
@@ -699,8 +699,9 @@ fieldset:disabled .row { opacity: .55; }
 }
 .splash.gone { opacity: 0; pointer-events: none; }
 .splash-card { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.splash-logo { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 45%, transparent)); }
+.splash-logo { filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .55)); }
 .splash-name { font-weight: 800; letter-spacing: .3em; font-size: 22px; }
+.splash-by { margin-top: -6px; color: var(--text-dim); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
 .splash-msg { color: var(--muted); font-size: var(--fs-md); }
 
 /* ---------- modal dialogs (sessions, about, shortcuts) ---------- */
@@ -731,7 +732,12 @@ dialog.modal::backdrop { background: rgba(5, 8, 13, .6); }
 .sess-act { display: flex; gap: 4px; flex: none; }
 .sess-act button { padding: 4px 8px; font-size: var(--fs-sm); min-width: var(--hit); }
 .about-hero { display: block; width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--r-md); margin-bottom: 10px; }
+.about-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.about-brand p { margin: 0; }
+.about-logo { display: block; flex: none; width: 48px; height: 48px; }
 .about-ver { display: flex; align-items: center; gap: 6px; font-weight: 800; letter-spacing: .14em; }
+.about-maker { font-weight: 700; letter-spacing: .06em; font-size: var(--fs-sm); margin-top: 2px !important; }
+.about-copy { font-size: var(--fs-xs); }
 .keys { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 6px 0 0; font-size: var(--fs-sm); align-items: center; }
 .keys dt { text-align: right; }
 .keys dd { margin: 0; color: var(--muted); }

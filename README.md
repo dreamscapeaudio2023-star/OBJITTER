@@ -1,5 +1,10 @@
 # OBJITTER
 
+<img src="public/assets/dreamscape-128.png" alt="DREAMSCAPE" width="48" height="48" align="left" />
+
+**Made by DREAMSCAPE** — Objitter 는 DREAMSCAPE 가 만들고 관리하는 소프트웨어입니다.<br />
+© 2026 DREAMSCAPE Inc. All rights reserved.
+
 ![Objitter](public/assets/hero.jpg)
 
 이머시브 오디오 시스템(SPAT Revolution, L-ISA, d&b Soundscape DS100, ADM-OSC 렌더러)의 오브젝트를 **랜덤 / 탭 템포 동기**로 움직이는 서드파티 오브젝트 모션 컨트롤러입니다.
@@ -570,7 +575,10 @@ public/        웹 UI (index.html, style.css, app.js)
   stage-draw.js  무대 배경 이미지·스피커 박스 그리기
   i18n.js        번역 함수 t()·언어 저장·단축키 표기(⌘/Ctrl)
   lang/en.js, lang/ko.js  UI 문구 (같은 키)
-  assets/        logo.svg(로고·파비콘), icon-*.png·favicon-*.png·apple-touch-icon.png(아이콘), hero.jpg(스플래시·About), icon-source.jpg(원본)
+  assets/        DREAMSCAPE 로고: logo.svg(파비콘·매니페스트), dreamscape-48/128.png(상단 바·스플래시·About),
+                 icon-*.png·icon-maskable-512.png·favicon-*.png·apple-touch-icon.png(아이콘), icon-source.png(macOS .icns 원본);
+                 hero.jpg(스플래시 배경·About)
+  favicon.ico    브라우저 탭 아이콘 (16·32·48)
   manifest.webmanifest  홈 화면 추가 / 앱 창 실행용 웹 앱 매니페스트
   tc-core.js     타임코드 공용 모듈 (드롭 프레임 변환, MTC 파서, LTC 디코더/합성기) — 서버·브라우저·테스트가 같이 사용
   ltc-worklet.js LTC 디코드 AudioWorklet
@@ -580,7 +588,9 @@ library/       오브젝트 라이브러리 (처음 저장할 때 생김)
 demo/          데모 쇼 파일
 data/          마지막 상태 (state.json)
 scripts/       데모 프리셋·쇼 생성 스크립트, make-mac-app.sh (macOS 앱 번들 만들기),
-               make-mac-pkg.sh + mac/ObjitterMenuBar.swift (macOS 설치 파일·메뉴 막대 앱)
+               make-mac-pkg.sh + mac/ObjitterMenuBar.swift (macOS 설치 파일·메뉴 막대 앱),
+               mac/assets/MenuBarIcon*.png (메뉴 막대 템플릿 아이콘),
+               make-brand-assets.ps1 (회사 로고 패키지 artifacts/brand-logo-v3 → 위 아이콘들 다시 만들기, Windows)
 test/          `npm test` — 단위 테스트 + 서버 통합 테스트 (임시 폴더·빈 포트 사용)
 ```
 
@@ -611,13 +621,14 @@ M1~M4 Mac(Apple Silicon)과 Intel Mac 모두 같은 방법입니다. Objitter �
    bash scripts/make-mac-app.sh            # 폴더 안에 Objitter.app 생성
    bash scripts/make-mac-app.sh /Applications
    ```
-   아이콘(`sips`·`iconutil` 로 `icon-source.jpg` 에서 .icns 생성)과 Info.plist 가 들어간 `Objitter.app` 을 만듭니다. 앱을 열면 터미널에서 `start-mac.command` 를 실행합니다 (로그가 보이고 `Ctrl+C` 로 종료). 폴더를 옮기면 스크립트를 다시 실행하세요.
+   아이콘(`sips`·`iconutil` 로 DREAMSCAPE 로고 `icon-source.png` 에서 .icns 생성)과 Info.plist 가 들어간 `Objitter.app` 을 만듭니다. 앱을 열면 터미널에서 `start-mac.command` 를 실행합니다 (로그가 보이고 `Ctrl+C` 로 종료). 폴더를 옮기면 스크립트를 다시 실행하세요.
 8. **설치 파일(.pkg) 만들기 (배포용)**: Mac 에서 (Xcode 또는 Command Line Tools 의 `swiftc` 필요)
    ```bash
    bash scripts/make-mac-pkg.sh            # → dist/Objitter-<버전>.pkg
    ```
    - Node.js(universal, arm64 + x86_64)를 앱 안에 넣으므로 설치할 Mac 에는 Node 가 없어도 됩니다. 처음 빌드할 때 Node 를 내려받아 `build/cache/` 에 보관합니다 (`NODE_VERSION=v24.21.0` 처럼 버전 지정 가능).
    - 설치하면 `/Applications/Objitter.app` — **메뉴 막대 앱**(`scripts/mac/ObjitterMenuBar.swift`)입니다. Dock·터미널 없이 서버를 백그라운드로 실행하고, 메뉴 막대 아이콘에서 서버 시작/정지/재시작, 웹 UI 열기, 네트워크 주소 복사, 로그 보기, 데이터 폴더 열기를 합니다. 메뉴는 시스템 언어(한국어/영어)를 따릅니다.
+   - 메뉴 막대 아이콘은 DREAMSCAPE 로고(템플릿 이미지 — 밝은/어두운 메뉴 막대에 맞춰 색이 바뀜)입니다. 서버가 실행 중이면 선명하게, 정지·시작 중이면 흐리게, 오류면 ⚠︎ 아이콘으로 표시합니다. `Objitter 정보` 에 제작사(DREAMSCAPE)와 저작권이 나옵니다.
    - 메뉴의 `설정`: 웹 UI 포트, OSC 컨트롤 포트, 외부 기기 접속 허용(끄면 `HOST=127.0.0.1`), 허용 호스트 이름, 잠자기 방지, 앱 실행 시 서버 자동 시작, 서버 시작 시 브라우저 열기, 로그인 시 실행. 값은 `defaults` 도메인 `app.objitter` 에 저장되고 서버 쪽 설정은 재시작 시 적용됩니다 (위 환경 변수로 전달).
    - 데이터: `~/Library/Application Support/Objitter` (`data/`, `presets/`, `library/` — 첫 실행 때 데모 프리셋 복사), 로그: `~/Library/Logs/Objitter/server.log`.
    - 앱 안의 서버 파일은 `Contents/Resources/app/` 입니다. 서버·UI 코드를 바꾼 뒤에는 스크립트를 다시 실행해 새 .pkg 를 만드세요. 설치 프로그램은 기존 앱을 종료·삭제한 뒤 설치하고, 끝나면 앱을 실행합니다.
@@ -670,6 +681,13 @@ npm test
 - 번역 테스트: 영어/한국어 키·자리표시자 일치, 영어 문구에 한글 없음, 코드와 `index.html` 에서 쓰는 모든 키가 존재, UI 코드에 하드코딩된 한국어 없음, 출력 시스템 옵션이 영어·한국어 쌍을 가짐.
 
 실제 `data/`·`presets/` 와 8080/9000 포트는 건드리지 않습니다.
+
+## 만든 곳
+
+Objitter 는 **DREAMSCAPE** 가 만들었습니다. 앱 아이콘·메뉴 막대 아이콘·웹 UI 로고는 DREAMSCAPE 브랜드 로고 v3 입니다.
+회사 원본 디자인 자산(`artifacts/`)은 저장소에 넣지 않고, 앱에 쓰는 파생 파일만 `public/assets/`·`scripts/mac/assets/` 에 둡니다.
+
+© 2026 DREAMSCAPE Inc. All rights reserved.
 
 ## 새 시스템 추가하기
 

@@ -1,5 +1,6 @@
 // Objitter menu bar app: runs the bundled Node server in the background and controls it from the status menu.
-// Built by scripts/make-mac-pkg.sh. Expects Contents/Resources/{node/bin/node, app/}.
+// Built by scripts/make-mac-pkg.sh. Expects Contents/Resources/{node/bin/node, app/} (+ optional MenuBarIcon.png/@2x).
+// © 2026 DREAMSCAPE Inc.
 import AppKit
 import Darwin
 import ServiceManagement
@@ -310,18 +311,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     // MARK: - status icon
 
+    /// DREAMSCAPE logo as a template image (Contents/Resources/MenuBarIcon.png + @2x). nil → SF Symbols.
+    lazy var brandIcon: NSImage? = {
+        guard let img = Bundle.main.image(forResource: "MenuBarIcon") else { return nil }
+        img.size = NSSize(width: 18, height: 18)
+        img.isTemplate = true
+        img.accessibilityDescription = "Objitter"
+        return img
+    }()
+
     func updateIcon() {
-        let symbol: String
-        switch server.state {
-        case .running: symbol = "waveform.circle.fill"
-        case .starting, .stopping: symbol = "waveform.circle"
-        case .stopped: symbol = "circle.dashed"
-        case .failed: symbol = "exclamationmark.triangle"
+        guard let button = statusItem.button else { return }
+        if server.state != .failed, let logo = brandIcon {
+            button.image = logo
+            button.appearsDisabled = server.state != .running
+        } else {
+            let symbol: String
+            switch server.state {
+            case .running: symbol = "waveform.circle.fill"
+            case .starting, .stopping: symbol = "waveform.circle"
+            case .stopped: symbol = "circle.dashed"
+            case .failed: symbol = "exclamationmark.triangle"
+            }
+            let img = NSImage(systemSymbolName: symbol, accessibilityDescription: "Objitter")
+            img?.isTemplate = true
+            button.image = img
+            button.appearsDisabled = false
         }
-        let img = NSImage(systemSymbolName: symbol, accessibilityDescription: "Objitter")
-        img?.isTemplate = true
-        statusItem.button?.image = img
-        statusItem.button?.toolTip = "Objitter — " + stateText()
+        button.toolTip = "Objitter — " + stateText()
     }
 
     func stateText() -> String {
@@ -467,7 +484,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc func about() {
         NSApp.activate(ignoringOtherApps: true)
-        NSApp.orderFrontStandardAboutPanel(nil)
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        let credits = NSAttributedString(
+            string: L("DREAMSCAPE 제작\n이머시브 오디오 오브젝트 모션 컨트롤러", "Made by DREAMSCAPE\nImmersive audio object motion controller"),
+            attributes: [
+                .font: NSFont.systemFont(ofSize: NSFont.smallSystemFontSize),
+                .foregroundColor: NSColor.secondaryLabelColor,
+                .paragraphStyle: style,
+            ])
+        NSApp.orderFrontStandardAboutPanel(options: [.credits: credits])
     }
 
     @objc func quit() { NSApp.terminate(nil) }

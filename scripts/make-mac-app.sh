@@ -21,7 +21,7 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 
 # ---- icon (.icns) ----
-SRC_ICON="$PROJECT_DIR/public/assets/icon-source.jpg"
+SRC_ICON="$PROJECT_DIR/public/assets/icon-source.png"
 [ -f "$SRC_ICON" ] || SRC_ICON="$PROJECT_DIR/public/assets/icon-512.png"
 TMP=$(mktemp -d)
 ICONSET="$TMP/Objitter.iconset"
@@ -50,6 +50,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>CFBundleIconFile</key><string>Objitter</string>
   <key>LSMinimumSystemVersion</key><string>11.0</string>
   <key>NSHighResolutionCapable</key><true/>
+  <key>NSHumanReadableCopyright</key><string>© 2026 DREAMSCAPE Inc. All rights reserved.</string>
+  <key>CFBundleGetInfoString</key><string>Objitter $VERSION · Made by DREAMSCAPE</string>
 </dict>
 </plist>
 PLIST

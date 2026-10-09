@@ -1206,7 +1206,9 @@ export default {
   'about.title': 'Objitter 정보',
   'about.desc': '이머시브 오디오용 제너레이티브 오브젝트 모션 — SPAT Revolution, L-ISA, d&b Soundscape, ADM-OSC 렌더러 등에 OSC 로 위치를 보냅니다.',
   'about.shortcuts': '키보드 단축키',
-
+  'about.madeBy': 'DREAMSCAPE 제작',
+  'about.company': 'Objitter 는 DREAMSCAPE 가 만들고 관리하는 소프트웨어입니다.',
+  'about.copyright': '© 2026 DREAMSCAPE Inc. All rights reserved.',
   // ---------- top bar zones, cheat sheet ----------
   'top.master': '마스터',
   'top.master.title': '마스터 속도·페이드 시간',

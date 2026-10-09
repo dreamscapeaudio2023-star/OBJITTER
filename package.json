@@ -10,6 +10,7 @@
     "test": "node test/smoke.js",
     "demo-presets": "node scripts/make-demo-presets.js"
   },
+  "author": "DREAMSCAPE Inc.",
   "keywords": ["osc", "spat", "l-isa", "soundscape", "immersive", "audio"],
   "license": "MIT",
   "engines": {

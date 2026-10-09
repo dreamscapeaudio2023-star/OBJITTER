@@ -15,6 +15,9 @@ state.json.*
 presets/*
 !presets/Demo - *.json
 
+# company design/brand source package (logos etc.) — derived files live in public/assets and scripts/mac/assets
+artifacts/
+
 # renderer project files used for local testing (SPAT / L-ISA sessions)
 example/
 

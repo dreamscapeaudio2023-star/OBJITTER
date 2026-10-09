@@ -1206,7 +1206,9 @@ export default {
   'about.title': 'About Objitter',
   'about.desc': 'Generative object motion for immersive audio — sends positions over OSC to SPAT Revolution, L-ISA, d&b Soundscape, ADM-OSC renderers and more.',
   'about.shortcuts': 'Keyboard shortcuts',
-
+  'about.madeBy': 'Made by DREAMSCAPE',
+  'about.company': 'Objitter is designed, built and maintained by DREAMSCAPE.',
+  'about.copyright': '© 2026 DREAMSCAPE Inc. All rights reserved.',
   // ---------- top bar zones, cheat sheet ----------
   'top.master': 'Master',
   'top.master.title': 'Master speed and fade time',
